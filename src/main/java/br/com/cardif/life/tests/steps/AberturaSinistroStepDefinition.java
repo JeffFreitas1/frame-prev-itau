@@ -39,7 +39,7 @@ public class AberturaSinistroStepDefinition {
 	@E("^preenchendo o Campo Certificado$")
 	public void preenchendo_o_campo_certificado() throws Throwable {
 		lifeConsultaClientePage = new LifeConsultaClientePage();
-		lifeConsultaClientePage.pesquisarClienteCertificado("1428552307");
+		lifeConsultaClientePage.pesquisarClienteCertificado("1323015124");
 
 	}
 

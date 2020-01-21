@@ -70,7 +70,6 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
 		// sfSendText(dtDataAviso, Utils.getValorFormulario("Data Aviso", formulario));
 		sfSendText(dtDataOcorrencia, Utils.getValorFormulario("Data Afastamento", formulario));
-		
 
 		sfSendText(dtDataAdmissao, Utils.getValorFormulario("Data Admissao", formulario));
 		sfSendText(dtDataAvisoPrevio, Utils.getValorFormulario("Data Aviso Previo", formulario));
@@ -85,8 +84,9 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 		return getNumeroSinistro();
 
 	}
-	
-	public String aberturaSinistroDesempregoInvoluntario(List<Map<String, String>> formulario) throws Exception {;
+
+	public String aberturaSinistroDesempregoInvoluntario(List<Map<String, String>> formulario) throws Exception {
+		;
 		sfZoomOut();
 		sfClick(listaRisco);
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
@@ -104,36 +104,39 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 		return getNumeroSinistro();
 
 	}
-	
+
 	public String aberturaSinistroMorte(List<Map<String, String>> formulario) throws Exception {
 		sfZoomOut();
 		sfClick(listaRisco);
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
 		sfClick(listaNatureza);
 		sfClick(natureza.replace("@NATUREZA", Utils.getValorFormulario("Natureza", formulario)));
-		sfSendText(dtDataOcorrencia, Utils.getValorFormulario("Data Ocorrencia", formulario));	
+		sfSendText(dtDataOcorrencia, Utils.getValorFormulario("Data Ocorrencia", formulario));
 		sfClick(botaoOkAberturaSinistro);
 		waitElementInvisibility(LifeHomeElementMap.loading);
 		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Abertura de Sinistro");
 		return getNumeroSinistro();
 
 	}
-	
+
 	public String aberturaSinistroIftt(List<Map<String, String>> formulario) throws Exception {
 		sfZoomOut();
 		sfClick(listaRisco);
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
-		sfClick(listaNatureza);
-		sfClick(natureza.replace("@NATUREZA", Utils.getValorFormulario("Natureza", formulario)));
 		sfSendText(dtDataOcorrencia, Utils.getValorFormulario("Data Ocorrencia", formulario));	
-		sfClick(botaoOkAberturaSinistro);
+		if (sfGetText(listaNatureza).isEmpty()) {
+			sfClick(listaNatureza);
+			sfClick(natureza.replace("@NATUREZA", Utils.getValorFormulario("Natureza", formulario)));
+			sfClick(botaoOkAberturaSinistro);
+		}else {
+				sfClick(botaoOkAberturaSinistro);
+		}
 		waitElementInvisibility(LifeHomeElementMap.loading);
 		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Abertura de Sinistro");
 		return getNumeroSinistro();
 
 	}
 
-	
 	public String getNumeroSinistro() throws Exception {
 
 		Map<String, Integer> cabecalho = new HashMap<>();
