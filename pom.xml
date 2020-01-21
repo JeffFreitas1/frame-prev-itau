@@ -17,123 +17,123 @@
 			<optional>true</optional>
 		</dependency>
 		<build>
-		<plugins>
+			<plugins>
+				<!-- adicionei daqui pra baixo -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.1</version>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+					<executions>
+						<execution>
+							<id>default-deploy</id>
+							<phase>deploy</phase>
+							<goals>
+								<goal>deploy</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>1.5.1</version>
+					<executions>
+						<execution>
+							<id>default-deploy</id>
+							<phase>deploy</phase>
+							<goals>
+								<goal>deploy</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<serverId>nexus-snapshots</serverId>
+						<nexusUrl>http://saos001ap13p.amer.net.intra:8081/nexus/</nexusUrl>
+						<skipStaging>true</skipStaging>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.4.2</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-provider-gitexe</artifactId>
+							<version>1.8.1</version>
+						</dependency>
+					</dependencies>
+					<configuration>
+						<tagNameFormat>v@{project.version}</tagNameFormat>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<releaseProfiles>releases</releaseProfiles>
+					</configuration>
+				</plugin>
+				<!-- adicionei daqui pra cima -->
+			</plugins>
+		</build>
+
 		<!-- adicionei daqui pra baixo -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.8.1</version>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-				<executions>
-					<execution>
-						<id>default-deploy</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>deploy</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.5.1</version>
-				<executions>
-					<execution>
-						<id>default-deploy</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>deploy</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<serverId>nexus-snapshots</serverId>
-					<nexusUrl>http://saos001ap13p.amer.net.intra:8081/nexus/</nexusUrl>
-					<skipStaging>true</skipStaging>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.4.2</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.scm</groupId>
-						<artifactId>maven-scm-provider-gitexe</artifactId>
-						<version>1.8.1</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<tagNameFormat>v@{project.version}</tagNameFormat>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<releaseProfiles>releases</releaseProfiles>
-				</configuration>
-			</plugin>
-			<!-- adicionei daqui pra cima -->
-		</plugins>
-	</build>
-	
-	<!-- adicionei daqui pra baixo -->
-	<profiles>
-		<profile>
-			<id>releases</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.5.1</version>
-						<executions>
-							<execution>
-								<id>default-deploy</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>deploy</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<serverId>nexus-releases</serverId>
-							<nexusUrl>http://saos001ap13p.amer.net.intra:8081/nexus/</nexusUrl>
-							<skipStaging>true</skipStaging>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-	<scm>
-		<connection>scm:git:http://saos101ap04p/git/automacao-life</connection>
-		<url>http://saos101ap04p/git/automacao-life</url>
-		<developerConnection>scm:git:http://saos101ap04p/git/automacao-life.git</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
-	<distributionManagement>
-		<snapshotRepository>
-			<id>nexus-snapshots</id>
-			<url>http://saos001ap13p.amer.net.intra:8081/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>nexus-releases</id>
-			<url>http://saos001ap13p.amer.net.intra:8081/nexus/content/repositories/releases</url>
-		</repository>
-	</distributionManagement>
-	<!-- adicionei daqui pra cima - -->
+		<profiles>
+			<profile>
+				<id>releases</id>
+				<build>
+					<plugins>
+						<plugin>
+							<groupId>org.sonatype.plugins</groupId>
+							<artifactId>nexus-staging-maven-plugin</artifactId>
+							<version>1.5.1</version>
+							<executions>
+								<execution>
+									<id>default-deploy</id>
+									<phase>deploy</phase>
+									<goals>
+										<goal>deploy</goal>
+									</goals>
+								</execution>
+							</executions>
+							<configuration>
+								<serverId>nexus-releases</serverId>
+								<nexusUrl>http://saos001ap13p.amer.net.intra:8081/nexus/</nexusUrl>
+								<skipStaging>true</skipStaging>
+							</configuration>
+						</plugin>
+					</plugins>
+				</build>
+			</profile>
+		</profiles>
+		<scm>
+			<connection>scm:git:http://saos101ap04p/git/automacao-life</connection>
+			<url>http://saos101ap04p/git/automacao-life</url>
+			<developerConnection>scm:git:http://saos101ap04p/git/automacao-life.git</developerConnection>
+			<tag>HEAD</tag>
+		</scm>
+		<distributionManagement>
+			<snapshotRepository>
+				<id>nexus-snapshots</id>
+				<url>http://saos001ap13p.amer.net.intra:8081/nexus/content/repositories/snapshots</url>
+			</snapshotRepository>
+			<repository>
+				<id>nexus-releases</id>
+				<url>http://saos001ap13p.amer.net.intra:8081/nexus/content/repositories/releases</url>
+			</repository>
+		</distributionManagement>
+		<!-- adicionei daqui pra cima - -->
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -155,8 +155,8 @@
 			<artifactId>poiji</artifactId>
 			<version>1.20.0</version>
 		</dependency>
-		
-<dependency>
+
+		<dependency>
 			<groupId>com.pojosontheweb</groupId>
 			<artifactId>monte-repack</artifactId>
 			<version>1.0</version>
@@ -225,6 +225,20 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.6</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>4.6</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.itextpdf/itextpdf -->
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.5.13</version>
 		</dependency>
 	</dependencies>
 </project>
