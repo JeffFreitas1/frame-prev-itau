@@ -97,6 +97,12 @@ public class LifeHomePage extends LifeHomeElementMap {
 		sfSwitchFrame(getIdFrame());
 	}
 	
+	public void acessarMenuTransacoesCliente() throws Exception {
+		sfNavigateDropDownMenu(menuTrancacoes);
+		sfClick(opcaoTransacaoCliente);
+		sfSwitchFrame(getIdFrame());
+	}
+	
 	public void acessarTrancacoesAutorizacaoPagamento() throws Exception{
 		sfNavigateDropDownMenu(menuTrancacoes);
 		sfNavigateDropDownMenu(opcaoTrancacaoSinistro);

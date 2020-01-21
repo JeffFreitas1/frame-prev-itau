@@ -8,6 +8,7 @@ import br.com.cardif.utils.PageObjectUtils;
 public class LifeHomeElementMap extends PageObjectUtils {
 
 	// Menu Relatorios
+	
 	protected String menuRelatorios = "//span[@class='ui-menuitem-text'][contains(.,'Relatórios')]";
 	protected String menuCarga = "//span[@class='ui-menuitem-text'][contains(.,'Carga')]";
 	protected String menuFinanceiro = "(//span[contains(.,'Financeiro')])[3]";
@@ -27,7 +28,9 @@ public class LifeHomeElementMap extends PageObjectUtils {
 	protected String opcaoTrancacaoAutorizacaoPagamento = "(//span[@class='ui-menuitem-text'][contains(.,'Autorização de Pagamentos')])[1]";
 	protected String abaAutorizacaoPagamento="(//a[contains(.,'Autorização de Pagamentos')])[3]";
 	protected String botaoFecharAba = "//span[@class='ui-icon ui-icon-close']";
-
+	protected String opcaoTransacaoCliente = "(//span[@class='ui-menuitem-text'][contains(.,'Clientes')])[2]";
+	
+	
 	// Xpath Imagem carregamento
 	public static String loading = "//div[@id and contains(@class,'ui-overlay-visible')][div/img[contains(@src,'loading')]]";
     //Xpath 

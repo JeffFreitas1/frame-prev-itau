@@ -53,6 +53,10 @@ public class LifeAberturaSinistroElementMap extends PageObjectUtils {
 	protected String natureza= "//li[@data-label='@NATUREZA']";
 	@FindBy(xpath = "//label[@id='frmClaimOpen:selCausa_label']")
 	protected WebElement listaCausa;
+	//Motivos de Demissão
+	@FindBy(xpath = "//label[contains(@id,'frmClaimOpen:selTipoDemissao_label')]")
+	protected WebElement listaDemissao;
+	protected String motivo= "//li[contains(@data-label,'@MOTIVO')]";
 	//Causa
 	protected String causa= "//li[@data-label='@CAUSA']";
 	@FindBy(xpath = "//label[@id='frmClaimOpen:selTipoEvento_label']")
