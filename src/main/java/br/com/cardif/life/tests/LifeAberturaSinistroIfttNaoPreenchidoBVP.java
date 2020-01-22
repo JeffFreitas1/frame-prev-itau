@@ -6,8 +6,8 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "c:/temp/features/", tags = "@aberturasinistrolifeifttbvpnatuezanaopreenchida", glue = {
+@CucumberOptions(features = "c:/temp/features/", tags = "@aberturasinistrolifeifttnaopreenchidobvp", glue = {
 		"br.com.cardif.life.tests.steps", "br.com.cardif.testrules" }, monochrome = true, dryRun = false)
-public class LifeAberturaSinistroIfttBVP {
+public class LifeAberturaSinistroIfttNaoPreenchidoBVP {
 
 }

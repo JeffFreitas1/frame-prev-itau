@@ -73,7 +73,7 @@ public class TestRule {
 			System.setProperty("webdriver.gecko.driver", "C:\\temp\\driver\\geckodriver.exe");
 			driver = new FirefoxDriver();
 			driver.manage().window().maximize();
-			wait = new WebDriverWait(driver, 120);
+			wait = new WebDriverWait(driver, 5);
 		}
 
 		if (extentReport == null) {
@@ -117,6 +117,7 @@ public class TestRule {
 			extentReport.flush();
 			logDesktop = logDesktop + "Cenario " + cenario.getName() + " executado com sucesso" + "\n";
 		}
+		finishTest();
 	}
 
 	@After("@emissaoRelatorio")

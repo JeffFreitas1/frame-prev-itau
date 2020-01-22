@@ -19,6 +19,8 @@ public class LifeAberturaSinistroElementMap extends PageObjectUtils {
 	protected String razaoAbertura= "//li[contains(.,'@RAZAOABERTURA')]";
 	@FindBy(xpath = "//input[@id='frmClaimOpen:dtDataOcorrencia_input']")
 	protected WebElement dtDataOcorrencia;
+	//DataOcorrenciaXpathBVP
+	protected String xpathDtOcorrencia = "//input[contains(@name,'frmClaimOpen:dtDataOcorrencia_input')]";
 	@FindBy(xpath = "//input[@id='frmClaimOpen:dtDataAviso_input']")
 	protected WebElement dtDataAviso;
 	@FindBy(xpath = "//input[@id='frmClaimOpen:dtDataAdmissao_input']")

@@ -104,8 +104,9 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 		return getNumeroSinistro();
 
 	}
+	
 
-	public String aberturaSinistroMorte(List<Map<String, String>> formulario) throws Exception {
+		public String aberturaSinistroMorte(List<Map<String, String>> formulario) throws Exception {
 		sfZoomOut();
 		sfClick(listaRisco);
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
@@ -118,8 +119,33 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 		return getNumeroSinistro();
 
 	}
+	
+	public String aberturaSinistroMorteBVP(List<Map<String, String>> formulario) throws Exception {
+		sfZoomOut();
+		sfClick(listaRisco);
+		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
+		if (sfGetText(listaNatureza).isEmpty()) {
+			sfClick(listaNatureza);
+			sfClick(natureza.replace("@NATUREZA", Utils.getValorFormulario("Natureza", formulario)));
+			sfSendText(xpathDtOcorrencia, Utils.getValorFormulario("Data Ocorrencia", formulario));
+			sfClick(botaoOkAberturaSinistro);
+			
+		}else {
+			    sfSendText(xpathDtOcorrencia, Utils.getValorFormulario("Data Ocorrencia", formulario));
+				sfClick(botaoOkAberturaSinistro);
+		}
+	   // waitElementInvisibility(LifeHomeElementMap.loading);
+		//sfSendText(xpathDtOcorrencia, Utils.getValorFormulario("Data Ocorrencia", formulario));
+		//sfClick(listaNatureza);
+		//sfClick(natureza.replace("@NATUREZA", Utils.getValorFormulario("Natureza", formulario)));
+		//sfClick(botaoOkAberturaSinistro);
+		waitElementInvisibility(LifeHomeElementMap.loading);
+		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Abertura de Sinistro");
+		return getNumeroSinistro();
 
-	public String aberturaSinistroIftt(List<Map<String, String>> formulario) throws Exception {
+	}
+
+	public String aberturaSinistroIfttNatuerzaNaoPreenchida(List<Map<String, String>> formulario) throws Exception {
 		sfZoomOut();
 		sfClick(listaRisco);
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
@@ -136,6 +162,19 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 		return getNumeroSinistro();
 
 	}
+	
+	public String aberturaSinistroRouboOuFurto(List<Map<String, String>> formulario) throws Exception {
+		sfZoomOut();
+		sfClick(listaRisco);
+		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
+		sfSendText(dtDataOcorrencia, Utils.getValorFormulario("Data Ocorrencia", formulario));
+		sfClick(botaoOkAberturaSinistro);
+		waitElementInvisibility(LifeHomeElementMap.loading);
+		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Abertura de Sinistro");
+		return getNumeroSinistro();
+
+	}
+	
 
 	public String getNumeroSinistro() throws Exception {
 
