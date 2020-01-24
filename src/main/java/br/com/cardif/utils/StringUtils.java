@@ -76,6 +76,7 @@ public class StringUtils {
 	}
 	
 	public static String converterVirgulaParaPonto(String valor) {
+		valor = valor.replace(".", "");
 		valor = valor.replace(",", ".");
 		return valor;
 	}

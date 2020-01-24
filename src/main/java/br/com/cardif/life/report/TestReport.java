@@ -1,5 +1,5 @@
-package br.com.cardif.report;
-//package br.com.cardif.report;
+package br.com.cardif.life.report;
+//package br.com.cardif.life.report;
 //
 //import java.io.IOException;
 //import java.io.InputStream;

@@ -40,4 +40,8 @@ public class LifeClienteDadosPessoaisPage extends LifeClienteDadosPessoaisElemen
 				&& sfGetSelectOptionValue(sexoCssSelector).equals(request.getSegurado().getSexo()));
 	}
 
+	public String getEmail() throws Exception {
+		return sfGetAttributeValue(txtEmail, "value");
+	}
+
 }

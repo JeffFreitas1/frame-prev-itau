@@ -13,9 +13,14 @@ public class LifeConsultaClienteElementMap extends PageObjectUtils{
 	
 	//Cabecalho tabela de certificados
 	protected String tabelaCabecalhoCertificados=".ui-datatable-scrollable-header-box > table:nth-child(1)";
+	//Cabecalho tabela dados pessoais
+	protected String csstabelaDadosClienteCabecalho=".ui-datatable-tablewrapper > table:nth-child(1)";
 	
 	//Tabela de certificados
-	protected String tabelaRegistrosCertificados=".ui-datatable-scrollable-body > table:nth-child(1)";
+	protected String csstabelaRegistrosCertificados=".ui-datatable-scrollable-body > table:nth-child(1)";
+	
+	//Tabela de dados pessoais
+	protected String csstabelaRegistrosDadosPessoais="#frmClientSearch\\:grdClientes_data";
 	
 	protected String opcoesBuscaCliente="//form[@id='frmClientSearch']";
 	@FindBy(xpath = "//input[@id='frmClientSearch:optCampoConsulta:0']")

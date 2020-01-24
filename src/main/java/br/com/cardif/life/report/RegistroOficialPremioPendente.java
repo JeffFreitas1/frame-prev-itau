@@ -1,4 +1,4 @@
-package br.com.cardif.report;
+package br.com.cardif.life.report;
 
 import com.poiji.annotation.ExcelCellName;
 

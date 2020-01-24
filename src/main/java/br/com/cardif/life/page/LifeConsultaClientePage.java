@@ -14,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import br.com.cardif.life.map.LifeConsultaClienteElementMap;
 import br.com.cardif.life.map.LifeHomeElementMap;
-import br.com.cardif.report.CertificadoLife;
+import br.com.cardif.life.report.CertificadoLife;
 import br.com.cardif.testrules.TestRule;
 import br.com.cardif.utils.Utils;
 
@@ -39,9 +39,11 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 
 	public void pesquisarClienteContrato(String contrato) throws Exception {
 		sfClick(botaoLimpar);
+		waitElementInvisibility(LifeHomeElementMap.loading);
 		sfMoveToElementClick(checkBoxNumeroContrato);
 		sfSendText(txtNumContrato, contrato);
 		sfClick(botaoPesquisar);
+		waitLoading(quantidadeRegistros);
 	}
 
 	public void abrirDetalheCliente() throws Exception {
@@ -64,7 +66,7 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 		}
 
 		// Leitura dos campos das linhas de acordo com a validação desejada
-		WebElement tabelaRegistros = sfGetElementByCss(tabelaRegistrosCertificados);
+		WebElement tabelaRegistros = sfGetElementByCss(csstabelaRegistrosCertificados);
 		List<WebElement> tr = tabelaRegistros.findElements(By.cssSelector("tr"));
 
 		for (WebElement linha : tr) {
@@ -81,26 +83,26 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 	public void selecionarCertificado(String certificado) throws Exception {
 		waitLoading(quantidadeRegistros);
 		// Leitura dos campos das linhas de acordo com a validação desejada
-		WebElement tabelaRegistros = sfGetElementByCss(tabelaRegistrosCertificados);
+		WebElement tabelaRegistros = sfGetElementByCss(csstabelaRegistrosCertificados);
 		List<WebElement> tr = tabelaRegistros.findElements(By.cssSelector("tr"));
 		sfMoveToElementClick(tr.stream().findFirst().get());
 		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Certificado Selecionado");
 	}
-	
-	public void abrirCertificadoDetalhe() throws Exception{
+
+	public void abrirCertificadoDetalhe() throws Exception {
 		waitLoading(quantidadeRegistros);
 		sfDoubleClick(getRegistrosCertificados().stream().findFirst().get());
 	}
-	
-	public void abrirAbaInformacoesComplementares() throws Exception{
+
+	public void abrirAbaInformacoesComplementares() throws Exception {
 		waitElementInvisibility(LifeHomeElementMap.loading);
-		sfClick(abaInformacoesComplementares);				
+		sfClick(abaInformacoesComplementares);
 	}
 
 	public void abrirSinistro() throws Exception {
 		sfClick(botaoSinistro);
 	}
-	
+
 	public void fecharCertificadoDetalhe() throws Exception {
 		sfClick(botaoFecharCertificado);
 	}
@@ -118,7 +120,7 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 		}
 
 		// Leitura dos campos das linhas de acordo com a validação desejada
-		WebElement tabelaRegistros = sfGetElementByCss(tabelaRegistrosCertificados);
+		WebElement tabelaRegistros = sfGetElementByCss(csstabelaRegistrosCertificados);
 		List<WebElement> tr = tabelaRegistros.findElements(By.cssSelector("tr"));
 
 		for (WebElement linha : tr) {
@@ -143,7 +145,7 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 		}
 
 		// Leitura dos campos das linhas de acordo com a validação desejada
-		WebElement tabelaRegistros = sfGetElementByCss(tabelaRegistrosCertificados);
+		WebElement tabelaRegistros = sfGetElementByCss(csstabelaRegistrosCertificados);
 		List<WebElement> tr = tabelaRegistros.findElements(By.cssSelector("tr"));
 
 		for (WebElement linha : tr) {
@@ -170,13 +172,13 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 
 			if (coluna.get(cabecalho.get("Contrato")).getText().equals(contrato)) {
 				sfMoveToElement(certificado);
-							
+
 				campos.stream().forEach(validacao -> {
 					String campo = validacao.get("Campo");
 					String valorEsperado = validacao.get("Valor");
-					String valorEncontrado=coluna.get(cabecalho.get(campo)).getText(); 
+					String valorEncontrado = coluna.get(cabecalho.get(campo)).getText();
 
-					if (!Utils.campoValido(valorEsperado,valorEncontrado )) {
+					if (!Utils.campoValido(valorEsperado, valorEncontrado)) {
 						String log = String.format(
 								"Contrato: %1$-16s com informação divergente Campo: %2$-15s Valor esperado: %3$-15s Valor encontrado: %4$-15s",
 								contrato, campo, valorEsperado, valorEncontrado);
@@ -184,7 +186,7 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 					}
 
 				});
-								
+
 			}
 
 		}
@@ -207,9 +209,87 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 	}
 
 	public List<WebElement> getRegistrosCertificados() throws Exception {
-		WebElement tabelaRegistros = sfGetElementByCss(tabelaRegistrosCertificados);
+		WebElement tabelaRegistros = sfGetElementByCss(csstabelaRegistrosCertificados);
 		return tabelaRegistros.findElements(By.cssSelector("tr"));
 	}
+
+	public Map<String, String> getDadosPessoais() throws Exception {
+		Map<String, String> dadosPessoais = new HashMap<>();
+
+		// Mapeamento dos campos da tabela de certificados
+		WebElement tabelaCabecalho = sfGetElementByCss(csstabelaDadosClienteCabecalho);
+		List<WebElement> thtabelaCabecalho = tabelaCabecalho.findElements(By.cssSelector("th"));
+
+		// Leitura dos campos das linhas de acordo com a validação desejada
+		WebElement tabelaRegistros = sfGetElementByCss(csstabelaRegistrosDadosPessoais);
+		List<WebElement> tr = tabelaRegistros.findElements(By.cssSelector("tr"));
+
+		for (WebElement linha : tr) {
+			List<WebElement> td = linha.findElements(By.cssSelector("td"));
+			sfMoveToElement(linha);
+			Utils.logPrint("Dados Pessoais");
+			
+			for (int index = 0; index < td.size(); index++) {
+				WebElement coluna = td.get(index);
+				
+				dadosPessoais.put(thtabelaCabecalho.get(index).getText().trim(),coluna.getText());
+			}
+						
+
+		}
+		return dadosPessoais;
+	}
 	
+	public void clickCertificado(String certificado) throws Exception {
+
+		Map<String, Integer> cabecalho = new HashMap<>();
+
+		// Mapeamento dos campos da tabela de certificados
+		WebElement tabelaCabecalho = sfGetElementByCss(tabelaCabecalhoCertificados);
+		List<WebElement> thtabelaCabecalho = tabelaCabecalho.findElements(By.cssSelector("th"));
+
+		for (int index = 0; index < thtabelaCabecalho.size(); index++) {
+			cabecalho.put(thtabelaCabecalho.get(index).getText().trim(), index);
+		}
+
+		// Leitura dos campos das linhas de acordo com a validacao desejada
+		WebElement tabelaRegistros = sfGetElementByCss(csstabelaRegistrosCertificados);
+		List<WebElement> tr = tabelaRegistros.findElements(By.cssSelector("tr"));
+
+		for (WebElement linha : tr) {
+			List<WebElement> td = linha.findElements(By.cssSelector("td"));
+			if (td.get(cabecalho.get("Certificado")).getText().equals(certificado)) {
+				sfMoveToElement(linha);
+				Utils.logPrint("Certificado");
+				sfDoubleClick(linha);
+			} else {
+			}
+		}
+	}
+	
+	public List<String> buscaCertificado() throws Exception {
+
+		waitLoading(quantidadeRegistros);
+
+		Map<String, Integer> cabecalho = new HashMap<>();
+
+		// Mapeamento dos campos da tabela de certificados
+		WebElement tabelaCabecalho = sfGetElementByCss(tabelaCabecalhoCertificados);
+		List<WebElement> thtabelaCabecalho = tabelaCabecalho.findElements(By.cssSelector("th"));
+		for (int index = 0; index < thtabelaCabecalho.size(); index++) {
+			cabecalho.put(thtabelaCabecalho.get(index).getText().trim(), index);
+		}
+
+		// Leitura dos campos das linhas de acordo com a validacao desejada
+		WebElement tabelaRegistros = sfGetElementByCss(csstabelaRegistrosCertificados);
+		List<WebElement> tr = tabelaRegistros.findElements(By.cssSelector("tr"));
+		List<String> listaCertificado = new ArrayList<String>();
+
+		for (WebElement linha : tr) {
+			List<WebElement> td = linha.findElements(By.cssSelector("td"));
+			listaCertificado.add(td.get(cabecalho.get("Certificado")).getText());
+		}
+		return listaCertificado;
+	}
 
 }

@@ -53,6 +53,8 @@ public class LifeClienteEnderecosPage extends LifeClienteEnderecosElementMap {
 			List<WebElement> td = linha.findElements(By.cssSelector("td"));
 
 			if (td.get(cabecalho.get("End. Correspondência")).getText().equals("Sim")) {
+				sfMoveToElement(linha);
+				Utils.logPrint("Endereço");
 
 				for (int index = 0; index < td.size(); index++) {
 					endereco.put(thtabelaCabecalho.get(index).getText().trim(), td.get(index).getText().trim());
@@ -62,6 +64,13 @@ public class LifeClienteEnderecosPage extends LifeClienteEnderecosElementMap {
 		}
 		return endereco;
 
+	}
+
+	public String getLogradouro(String rua, String numero) throws Exception {
+
+		String endereco = rua;
+		endereco = endereco + " , " + numero;
+		return endereco;
 	}
 
 }

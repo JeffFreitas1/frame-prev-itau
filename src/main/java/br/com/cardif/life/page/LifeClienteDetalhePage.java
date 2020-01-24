@@ -35,7 +35,7 @@ public class LifeClienteDetalhePage extends LifeClienteDetalheElementMap {
 		waitElementInvisibility(loadingPagamento);
 	}
 
-	public void fecharAbaHistoricoPagamentos() throws Exception {
+	public void fecharDadosCliente() throws Exception {
 		sfClick(botaoFecharDadosCliente);
 	}
 
@@ -171,6 +171,12 @@ public class LifeClienteDetalhePage extends LifeClienteDetalheElementMap {
 		}
 
 		return certificadoValido;
+	}
+
+	public void acessarDadosPessoais() throws Exception {
+		waitLoading(detalheCliente);
+		sfClick(abaDadosPessoais);
+		waitElementInvisibility(LifeHomeElementMap.loading);
 	}
 
 }

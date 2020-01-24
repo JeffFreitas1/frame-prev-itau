@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import br.com.cardif.utils.PageObjectUtils;
 
 public class LifeCertificadoDetalheElementMap extends PageObjectUtils {
+	
+	
+	protected String xpathCertificadoPage = "//span[@id='dlgCertificado_title']";
 
 	// Quantidade de registros
 	protected String quantidadeRegistros = "//label[contains(.,'Total de registros: 1')]";
@@ -32,6 +35,7 @@ public class LifeCertificadoDetalheElementMap extends PageObjectUtils {
 	
 	protected String show = "//*[@id=\"frmCertificate:tabsCertificado:btnShow\"]";
 	
+	
 	//Total premio certificado
 
 	protected String totalDoPremio = "//*[@id=\"frmCertificate:tabsCertificado:txtTotalPremio\"]"; 
@@ -39,7 +43,7 @@ public class LifeCertificadoDetalheElementMap extends PageObjectUtils {
 
 	
 	// btn fechar detalhes do certificado
-	protected String fechar = "#frmCertificate\\:j_id_qh";
+	protected String fechar = "#frmCertificate\\:j_id_qg";
 	
 	
 		
@@ -52,11 +56,11 @@ public class LifeCertificadoDetalheElementMap extends PageObjectUtils {
 	
 	protected String nomePlano = "#frmCertificate\\:cboPlan_input" ;
 	
-	protected String premio = "#frmCertificate\\:j_id_pr" ;
-	
+	protected String premio = "#frmCertificate\\:j_id_pu" ;
+		
 	protected String lmi = "#frmCertificate\\:inssuredAmount";
 
-	protected String cancelar = "#frmCertificate\\:j_id_q9";
+	protected String cancelar = "#frmCertificate\\:j_id_q8";
 	
 
 
