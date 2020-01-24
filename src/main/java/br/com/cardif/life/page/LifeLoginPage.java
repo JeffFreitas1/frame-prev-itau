@@ -14,7 +14,7 @@ public class LifeLoginPage extends LifeLoginElementMap {
 	public LifeLoginPage() throws Exception {
 		driver=TestRule.getDriver();
 		wait = TestRule.getWaitDriver();
-		abrirURL("http://saos101ws06t.br.xcd.net.intra:28080/life/login.xhtml");
+		abrirURL("http://saos101ws06tt.br.xcd.net.intra:28080/life/login.xhtml");
 	    sfSwitchAlertAccept();
 		waitLoading(labelLogin);
 		Thread.sleep(5000);

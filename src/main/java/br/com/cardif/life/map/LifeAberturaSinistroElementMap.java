@@ -67,7 +67,7 @@ public class LifeAberturaSinistroElementMap extends PageObjectUtils {
 	protected String tipoevento= "//li[@data-label='@TIPOEVENTO']";
 	@FindBy(xpath = "//textarea[@id='frmClaimOpen:txtParecer']")
 	protected WebElement txtParecer;
-	//Cabe�alho Certificados
+	//Cabeçalho Certificados
 	protected String indexPolicyCertificateTable="#frmClaimOpen\\:policyCertificateTable > div:nth-child(1) > div:nth-child(1) > table:nth-child(1)";
 	// Tabela de Certificados
 	protected String policyCertificateTable = "#frmClaimOpen\\:policyCertificateTable > div:nth-child(2) > table:nth-child(1)";
@@ -79,6 +79,24 @@ public class LifeAberturaSinistroElementMap extends PageObjectUtils {
 	protected WebElement botaosairAberturaSinistro;
 	@FindBy(xpath = "//*[@id=\"frmClaimOpen:btRegistrarEndereco\"]")
 	protected WebElement botaoRegistrarEndereco;
+	//Pop-up Data de aviso vazia
+	@FindBy(xpath = "(//span[contains(.,'OK')])[2]")
+	protected WebElement botaoOkDataDeAvisoVazia;
+	//Label Pop-up Data de aviso vazia
+	@FindBy(xpath = "//span[@class='ui-messages-warn-detail']")
+	protected WebElement labelDataDeAvisoVazia;
+	//Pop-up Natureza Não preenchida
+	@FindBy(xpath = "(//span[contains(.,'OK')])[2]")
+	protected WebElement botaoOkNaturezaVazia;
+	//Pop-up Risco não informado
+	@FindBy(xpath = "(//span[contains(.,'OK')])[2]")
+	protected WebElement botaoOkRiscoNaoInformado;
+	//Mensagens de erro
+
+	
+	
+	
+	
 	
 	
 	

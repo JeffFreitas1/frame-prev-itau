@@ -54,8 +54,11 @@ public class LifeConsultaClienteElementMap extends PageObjectUtils{
 	protected WebElement botaoSinistro;
 	@FindBy(xpath = "//a[@href='#frmCertificate:tabsCertificado:tabInfoComplementares']")
 	protected WebElement abaInformacoesComplementares;
-	@FindBy(xpath = "//*[@id=\"frmCertificate:j_id_qg\"]")
+	@FindBy(xpath = "(//span[contains(.,'OK')])[1]")
 	protected WebElement botaoFecharCertificado;
+	//Mensagens de Erro
+	@FindBy(xpath = "//span[@class='ui-button-text ui-c'][contains(.,'OK')])[1]")
+	protected WebElement botaoSinstroExistente;
 	
 	
 	
