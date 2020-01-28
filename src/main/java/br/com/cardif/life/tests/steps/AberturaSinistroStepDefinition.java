@@ -41,7 +41,7 @@ public class AberturaSinistroStepDefinition {
 	@E("^preenchendo o Campo Certificado$")
 	public void preenchendo_o_campo_certificado() throws Throwable {
 		LifeConsultaClientePage lifeConsultaClientePage = new LifeConsultaClientePage();
-		lifeConsultaClientePage.pesquisarClienteCertificado("788600675");
+		lifeConsultaClientePage.pesquisarClienteCertificado("753464545");
 
 	}
 
@@ -67,6 +67,7 @@ public class AberturaSinistroStepDefinition {
 
 	@Entao("^o sinistro devera ser aberto de acordo com as informacoes do formulario de risco desemprego$")
 	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_de_risco_desemprego(List<Map<String, String>> formulario) throws Throwable {
+		LifeAberturaSinistroPage lifeAberturaSinistroPage = new LifeAberturaSinistroPage();
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroDesemprego(formulario);
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
 
@@ -74,6 +75,7 @@ public class AberturaSinistroStepDefinition {
 	
 	@Entao("^o sinistro devera ser aberto de acordo com as informacoes do formulario de risco desemprego involuntario$")
 	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_de_risco_desemprego_involuntario(List<Map<String, String>> formulario) throws Throwable {
+		LifeAberturaSinistroPage lifeAberturaSinistroPage = new LifeAberturaSinistroPage();
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroDesempregoInvoluntario(formulario);
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
 
