@@ -19,6 +19,8 @@ public class LifeAberturaSinistroElementMap extends PageObjectUtils {
 	protected String razaoAbertura= "//li[contains(.,'@RAZAOABERTURA')]";
 	@FindBy(xpath = "//input[@id='frmClaimOpen:dtDataOcorrencia_input']")
 	protected WebElement dtDataOcorrencia;
+	//DataOcorrenciaXpathBVP
+	protected String xpathDtOcorrencia = "//input[contains(@name,'frmClaimOpen:dtDataOcorrencia_input')]";
 	@FindBy(xpath = "//input[@id='frmClaimOpen:dtDataAviso_input']")
 	protected WebElement dtDataAviso;
 	@FindBy(xpath = "//input[@id='frmClaimOpen:dtDataAdmissao_input']")
@@ -53,6 +55,10 @@ public class LifeAberturaSinistroElementMap extends PageObjectUtils {
 	protected String natureza= "//li[@data-label='@NATUREZA']";
 	@FindBy(xpath = "//label[@id='frmClaimOpen:selCausa_label']")
 	protected WebElement listaCausa;
+	//Motivos de Demissão
+	@FindBy(xpath = "//label[contains(@id,'frmClaimOpen:selTipoDemissao_label')]")
+	protected WebElement listaDemissao;
+	protected String motivo= "//li[contains(@data-label,'@MOTIVO')]";
 	//Causa
 	protected String causa= "//li[@data-label='@CAUSA']";
 	@FindBy(xpath = "//label[@id='frmClaimOpen:selTipoEvento_label']")
@@ -61,7 +67,7 @@ public class LifeAberturaSinistroElementMap extends PageObjectUtils {
 	protected String tipoevento= "//li[@data-label='@TIPOEVENTO']";
 	@FindBy(xpath = "//textarea[@id='frmClaimOpen:txtParecer']")
 	protected WebElement txtParecer;
-	//Cabe�alho Certificados
+	//Cabeçalho Certificados
 	protected String indexPolicyCertificateTable="#frmClaimOpen\\:policyCertificateTable > div:nth-child(1) > div:nth-child(1) > table:nth-child(1)";
 	// Tabela de Certificados
 	protected String policyCertificateTable = "#frmClaimOpen\\:policyCertificateTable > div:nth-child(2) > table:nth-child(1)";
@@ -73,6 +79,24 @@ public class LifeAberturaSinistroElementMap extends PageObjectUtils {
 	protected WebElement botaosairAberturaSinistro;
 	@FindBy(xpath = "//*[@id=\"frmClaimOpen:btRegistrarEndereco\"]")
 	protected WebElement botaoRegistrarEndereco;
+	//Pop-up Data de aviso vazia
+	@FindBy(xpath = "(//span[contains(.,'OK')])[2]")
+	protected WebElement botaoOkDataDeAvisoVazia;
+	//Label Pop-up Data de aviso vazia
+	@FindBy(xpath = "//span[@class='ui-messages-warn-detail']")
+	protected WebElement labelDataDeAvisoVazia;
+	//Pop-up Natureza Não preenchida
+	@FindBy(xpath = "(//span[contains(.,'OK')])[2]")
+	protected WebElement botaoOkNaturezaVazia;
+	//Pop-up Risco não informado
+	@FindBy(xpath = "(//span[contains(.,'OK')])[2]")
+	protected WebElement botaoOkRiscoNaoInformado;
+	//Mensagens de erro
+
+	
+	
+	
+	
 	
 	
 	

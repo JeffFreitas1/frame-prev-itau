@@ -106,6 +106,10 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 	public void fecharCertificadoDetalhe() throws Exception {
 		sfClick(botaoFecharCertificado);
 	}
+	
+	public void fecharPopUpSinistroExistente() throws Exception {
+		sfClick(botaoFecharCertificado);
+	}
 
 	public String getNumeroContrato() throws Exception {
 		waitLoading(quantidadeRegistros);

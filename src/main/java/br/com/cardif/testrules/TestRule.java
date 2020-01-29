@@ -272,7 +272,6 @@ public class TestRule {
 		driver.quit();
 		driver = null;
 		clearQtdPrint();
-
 	}
 
 	@Before("@cenario_pendente")
