@@ -1,4 +1,4 @@
-	package br.com.cardif.life.tests.steps;
+package br.com.cardif.life.tests.steps;
 
 import java.util.List;
 import java.util.Map;

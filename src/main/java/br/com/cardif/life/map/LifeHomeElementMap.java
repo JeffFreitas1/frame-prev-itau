@@ -29,6 +29,7 @@ public class LifeHomeElementMap extends PageObjectUtils {
 	protected String abaAutorizacaoPagamento="(//a[contains(.,'Autorização de Pagamentos')])[3]";
 	protected String botaoFecharAba = "//span[@class='ui-icon ui-icon-close']";
 	protected String opcaoTransacaoCliente = "(//span[@class='ui-menuitem-text'][contains(.,'Clientes')])[2]";
+	protected String opcaoAnaliseSinistro = "(//span[@class='ui-menuitem-text'][contains(.,'Análise de Sinistro')])";
 	
 	
 	// Xpath Imagem carregamento

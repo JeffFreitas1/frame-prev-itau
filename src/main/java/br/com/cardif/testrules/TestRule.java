@@ -96,10 +96,10 @@ public class TestRule {
 //					"application/csv, text/csv, text/plain,application/octet-stream doc xlsx pdf txt");
 //			firefoxOptions.addPreference("pdfjs.disabled", true);
 			
-//			String usuario = System.getProperty("user.name");
-//			System.setProperty("webdriver.firefox.bin",
-//			"C:\\Users\\"+usuario+"\\AppData\\Local\\Mozilla Firefox\\firefox.exe");
-			System.setProperty("webdriver.firefox.bin", "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
+			String usuario = System.getProperty("user.name");
+			System.setProperty("webdriver.firefox.bin",
+			"C:\\Users\\"+usuario+"\\AppData\\Local\\Mozilla Firefox\\firefox.exe");
+//			System.setProperty("webdriver.firefox.bin", "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
 
 			// Inicialização das propriedades do navegador
 

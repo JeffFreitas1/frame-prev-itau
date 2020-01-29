@@ -61,6 +61,22 @@ public class LifeConsultaSinistroPage extends LifeConsultaSinistroElementMap {
 		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Situação do Sinistro");
 		return situacaoSinistro;
 	}
+	
+	public boolean validarNumeroSinistro(String situacao) throws Exception {
+		boolean situacaoSinistro = false;
+		
+		// Mapeamento dos campos da tabela de certificados
+		int indexStatusSinistro = sfGetXPathCount(indexColunaSinistro.replace("@NOME_COLUNA", "Status Sinistro")) + 1;
+
+		sfMoveToElement(valorColunaSinistro.replaceAll("@INDEX",
+				Integer.toString(indexStatusSinistro)));
+		String valorStatusSinistro = sfGetText(valorColunaSinistro
+				.replaceAll("@INDEX", Integer.toString(indexStatusSinistro))).trim();
+		
+		situacaoSinistro=valorStatusSinistro.equals(situacao);
+		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Situação do Sinistro");
+		return situacaoSinistro;
+	}
 
 	public void salvarAlteracoesSinistro() throws Exception {
 		sfClick(botaoSalvarAlteracaoSinistros);
