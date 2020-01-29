@@ -1,5 +1,6 @@
 package br.com.cardif.life.steps;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
@@ -7,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.junit.Assert;
 
 import br.com.cardif.life.page.LifeConsultaClientePage;
 import br.com.cardif.life.page.LifeHomePage;
@@ -60,6 +63,7 @@ public class LifeGraficaSteps {
 		FileWriter arquivoLog = new FileWriter(
 				TestRule.getPathCenarioEvidencia().concat("\\logRelatorioContasTransitorias.txt"), true);
 		PrintWriter gravarArq = new PrintWriter(arquivoLog);
+		boolean arquivoValido;
 
 		for (int indexRelatorio = 0; indexRelatorio < list.size(); indexRelatorio++) {
 			Double totalDoPremio = 0.0;
@@ -68,11 +72,12 @@ public class LifeGraficaSteps {
 			Map<String, String> endereco = new HashMap<>();
 			Map<String, String> dadosPessoais = new HashMap<>();
 			dadosPessoais = lifeconsultacliente.getDadosPessoais();
-
+			
+			
 			// Validando informações do cliente
-			reportRegistroGrafica.validar(reportRegistroGrafica.LimparData(list.get(indexRelatorio).getDtNacimento()),
-					dadosPessoais.get("Data de Nascimento"), "Campo : dtNacimento", gravarArq, indexRelatorio);
-			reportRegistroGrafica.validar(dadosPessoais.get("CPF/CNPJ"),
+			reportRegistroGrafica.validar(StringUtils.removeCaracteresEspeciais(dadosPessoais.get("Data de Nascimento")),
+					reportRegistroGrafica.LimparData(list.get(indexRelatorio).getDtNacimento()), "Campo : dtNacimento", gravarArq, indexRelatorio);
+			reportRegistroGrafica.validar(StringUtils.removeCaracteresEspeciais( dadosPessoais.get("CPF/CNPJ")),
 					list.get(indexRelatorio).getCpfCnpj().substring(3), "Campo : CPF", gravarArq, indexRelatorio);
 			reportRegistroGrafica.validar(dadosPessoais.get("Nome").trim(), list.get(indexRelatorio).getNome().trim(),
 					"Campo : Nome", gravarArq, indexRelatorio);
@@ -115,7 +120,7 @@ public class LifeGraficaSteps {
 			lifecertificadodetalhepage= new LifeCertificadoDetalhePage();
 			lifecertificadodetalhepage.abrirAbaComposicao();
 			String valor=lifecertificadodetalhepage.getValorTotalPremio();
-			System.out.println("Valor premio: "+valor);
+		
 			totalDoPremio = Double.parseDouble(
 					StringUtils.converterVirgulaParaPonto(valor));
 			listPlanos = lifecertificadodetalhepage
@@ -203,6 +208,9 @@ public class LifeGraficaSteps {
 		}
 
 		arquivoLog.close();
+		File arquivoLeitura = new File(TestRule.getPathCenarioEvidencia().concat("\\logRelatorioContasTransitorias.txt"));
+		arquivoValido =  (arquivoLeitura.length() > 0);
+		Assert.assertFalse(arquivoValido);
 
 	}
 

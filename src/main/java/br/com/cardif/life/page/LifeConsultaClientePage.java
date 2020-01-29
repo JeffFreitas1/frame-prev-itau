@@ -215,7 +215,7 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 
 	public Map<String, String> getDadosPessoais() throws Exception {
 		Map<String, String> dadosPessoais = new HashMap<>();
-
+		waitElementInvisibility(LifeHomeElementMap.loading);
 		// Mapeamento dos campos da tabela de certificados
 		WebElement tabelaCabecalho = sfGetElementByCss(csstabelaDadosClienteCabecalho);
 		List<WebElement> thtabelaCabecalho = tabelaCabecalho.findElements(By.cssSelector("th"));

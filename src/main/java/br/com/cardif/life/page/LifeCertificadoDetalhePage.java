@@ -59,14 +59,14 @@ public class LifeCertificadoDetalhePage extends LifeCertificadoDetalheElementMap
 
 		// Mapeamento dos campos da tabela de certificados
 		WebElement tabelaCabecalho = sfGetElementByCss(tabelaCabecalhoCobertura);
-		List<WebElement> litabelaCabecalho = tabelaCabecalho.findElements(By.cssSelector("li"));
+		List<WebElement> listabelaCabecalho = tabelaCabecalho.findElements(By.cssSelector("li"));
 		List<LifePlano> listPlano = new ArrayList<LifePlano>();
 
-		for (int index = 0; index < litabelaCabecalho.size(); index++) {
+		for (int index = 0; index < listabelaCabecalho.size(); index++) {
 
-			if (litabelaCabecalho.get(index).findElement(By.cssSelector("span")).getText().equals(texto.trim())) {
+			if (listabelaCabecalho.get(index).findElement(By.cssSelector("span")).getText().equals(texto.trim())) {
 				waitElementInvisibility(LifeHomeElementMap.loading);
-				litabelaCabecalho.get(index).findElement(By.cssSelector("span")).click();
+				listabelaCabecalho.get(index).findElement(By.cssSelector("span")).click();
 				waitElementInvisibility(LifeHomeElementMap.loading);
 				sfMoveToElementClick(show);
 				waitElementInvisibility(LifeHomeElementMap.loading);
@@ -79,8 +79,9 @@ public class LifeCertificadoDetalhePage extends LifeCertificadoDetalheElementMap
 				// pegando o valor do campo cobertura
 				Select selectCobertura = new Select(driver.findElement(By.cssSelector(cobertura)));
 				WebL = selectCobertura.getFirstSelectedOption();
+				sfMoveToElement(WebL);
 				String planoCobertura = WebL.getAttribute("text");
-				Utils.logPrint("Valores plano cobertura "+planoCobertura);
+				Utils.logPrint("Valores plano cobertura "+planoCobertura.replace("/", "-"));
 
 				// pegando o valor do campo plano
 				Select selectPlano = new Select(driver.findElement(By.cssSelector(nomePlano)));

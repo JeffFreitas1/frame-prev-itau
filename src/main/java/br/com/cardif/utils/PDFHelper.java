@@ -367,6 +367,7 @@ public class PDFHelper {
 			stamper.close();
 			
 			msgs.clear();
+			reader.close();
 
 		} catch (BadElementException e) {
 			// e.printStackTrace();
@@ -393,12 +394,14 @@ public class PDFHelper {
 			
 			if (reader.getNumberOfPages() == 0) {
 				docWeb = null;
-
+				reader.close();
 				clearTempFile();
 			} else {
 				docWeb.close();
 				headerPdf(testResult, msgTotal);
 				docWeb = null;
+				reader.close();
+				reader=null;
 				clearTempFile();
 				
 			}

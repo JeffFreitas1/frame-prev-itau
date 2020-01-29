@@ -497,11 +497,11 @@ public class RegistroGrafica {
 			throws IOException {
 
 		if (campo1.equals(campo2)) {
-			System.out.println("Linha  : " + (linha + 2) + "  " + coluna + " Valido->" + " Valor encontrado no site : "
+			System.out.println("Linha  : " + (linha + 2) + "  " + coluna + " Valido->" + " Valor encontrado no Life : "
 					+ campo1 + " valor recebido do arquivo :  " + campo2);
 		} else {
 			String log = String.format("Erro na linha : " + (linha + 2) + "  " + coluna + " Invalido->"
-					+ " Valor encontrado no site : " + campo1 + " valor recebido do arquivo :  " + campo2);
+					+ " Valor encontrado no Life : " + campo1 + " valor recebido do arquivo :  " + campo2);
 			gravarArq.println(log);
 		}
 	}
