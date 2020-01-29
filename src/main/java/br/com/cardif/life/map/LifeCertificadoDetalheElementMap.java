@@ -50,17 +50,19 @@ public class LifeCertificadoDetalheElementMap extends PageObjectUtils {
 	
 	// Campos do plano
 	
-	protected String risco = "#frmCertificate\\:cboRisk_input" ;
+	protected String cssrisco = "#frmCertificate\\:cboRisk_input" ;
 	
-	protected String cobertura = "#frmCertificate\\:cboCoverage_input" ;
+	protected String csscobertura = "#frmCertificate\\:cboCoverage_input" ;
 	
-	protected String nomePlano = "#frmCertificate\\:cboPlan_input" ;
+	protected String cssnomePlano = "#frmCertificate\\:cboPlan_input" ;
 	
-	protected String premio = "#frmCertificate\\:j_id_pu" ;
+	protected String csspremio = "#frmCertificate\\:j_id_pr";
+	
+	protected String csspremioFator="#frmCertificate\\:j_id_pu";
 		
-	protected String lmi = "#frmCertificate\\:inssuredAmount";
+	protected String csslmi = "#frmCertificate\\:inssuredAmount";
 
-	protected String cancelar = "#frmCertificate\\:j_id_q8";
+	protected String csscancelar = "#frmCertificate\\:j_id_q8";
 	
 
 

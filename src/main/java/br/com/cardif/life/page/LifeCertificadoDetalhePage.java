@@ -72,33 +72,35 @@ public class LifeCertificadoDetalhePage extends LifeCertificadoDetalheElementMap
 				waitElementInvisibility(LifeHomeElementMap.loading);
 
 				// pegando o valor do campo Risco
-				Select selectRisco = new Select(driver.findElement(By.cssSelector(risco)));
+				Select selectRisco = new Select(driver.findElement(By.cssSelector(cssrisco)));
 				WebElement WebL = selectRisco.getFirstSelectedOption();
 				String planoRisco = WebL.getAttribute("text");
 
 				// pegando o valor do campo cobertura
-				Select selectCobertura = new Select(driver.findElement(By.cssSelector(cobertura)));
+				Select selectCobertura = new Select(driver.findElement(By.cssSelector(csscobertura)));
 				WebL = selectCobertura.getFirstSelectedOption();
 				sfMoveToElement(WebL);
 				String planoCobertura = WebL.getAttribute("text");
 				Utils.logPrint("Valores plano cobertura "+planoCobertura.replace("/", "-"));
 
 				// pegando o valor do campo plano
-				Select selectPlano = new Select(driver.findElement(By.cssSelector(nomePlano)));
+				Select selectPlano = new Select(driver.findElement(By.cssSelector(cssnomePlano)));
 				WebL = selectPlano.getFirstSelectedOption();
 				String planoNome = WebL.getAttribute("text");
 
 				// pegando o valor do campo premio
-				WebL = driver.findElement(By.cssSelector(premio));
+				//boolean tipoPlano = sfIsElementPresent(fieldName);
+				
+				WebL = driver.findElement(By.cssSelector(csspremio));
 				Double planoPremio = Double
 						.parseDouble(StringUtils.converterVirgulaParaPonto(WebL.getAttribute("value")));
 
 				// pegando o valor do campo LMI
-				WebL = driver.findElement(By.cssSelector(lmi));
+				WebL = driver.findElement(By.cssSelector(csslmi));
 				String planoLmi = WebL.getAttribute("value");
 
 				listPlano.add(new LifePlano(planoRisco, planoCobertura, planoPremio, planoLmi, planoNome));
-				sfMoveToElementClickCss(cancelar);
+				sfMoveToElementClickCss(csscancelar);
 			}
 		}
 		return listPlano;

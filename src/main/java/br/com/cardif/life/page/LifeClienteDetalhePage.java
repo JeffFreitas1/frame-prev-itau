@@ -37,6 +37,7 @@ public class LifeClienteDetalhePage extends LifeClienteDetalheElementMap {
 
 	public void fecharDadosCliente() throws Exception {
 		sfClick(botaoFecharDadosCliente);
+		waitElementInvisibility(LifeHomeElementMap.loading);
 	}
 
 	public boolean validarCertificadoCancelado(String certificado) throws Exception {

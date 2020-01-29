@@ -115,8 +115,7 @@ public class LifeGraficaSteps {
 //					lifeconsultacliente.getDataExpiracao(), "Campo : dtExpiração", gravarArq, indexRelatorio);
 			
 			listaCertificados = lifeconsultacliente.buscaCertificado();
-			lifeconsultacliente
-					.clickCertificado(list.get(indexRelatorio).getCertificado().trim().substring(5));
+			lifeconsultacliente.clickCertificado(list.get(indexRelatorio).getCertificado().trim());
 			lifecertificadodetalhepage= new LifeCertificadoDetalhePage();
 			lifecertificadodetalhepage.abrirAbaComposicao();
 			String valor=lifecertificadodetalhepage.getValorTotalPremio();
@@ -168,7 +167,7 @@ public class LifeGraficaSteps {
 			Double valorCobertura4 = 0.0;
 			for (int index = 0; index < listaCertificados.size(); index++) {
 				if (listaCertificados.get(index).toString()
-						.equals(list.get(indexRelatorio).getCertificado().trim().substring(5))) {
+						.equals(list.get(indexRelatorio).getCertificado().trim())) {
 				} else {
 					listPlanos.clear();
 					lifeconsultacliente.clickCertificado(listaCertificados.get(index).toString().trim());
