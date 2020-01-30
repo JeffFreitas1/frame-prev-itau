@@ -29,7 +29,8 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 		PageFactory.initElements(driver, this);
 		sfMoveToElementClick(checkBoxExibirTodos);
 	}
-
+	
+	
 	public void pesquisarClienteCertificado(String certificado) throws Exception {
 		sfClick(botaoLimpar);
 		sfClick(buscarCertificado);
@@ -38,6 +39,9 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 	}
 
 	public void pesquisarClienteContrato(String contrato) throws Exception {
+		waitElementInvisibility(LifeHomeElementMap.loading);
+		sfClick(botaoLimpar);
+		waitElementInvisibility(LifeHomeElementMap.loading);
 		sfClick(botaoLimpar);
 		waitElementInvisibility(LifeHomeElementMap.loading);
 		sfMoveToElementClick(checkBoxNumeroContrato);
@@ -225,6 +229,7 @@ public class LifeConsultaClientePage extends LifeConsultaClienteElementMap {
 		List<WebElement> thtabelaCabecalho = tabelaCabecalho.findElements(By.cssSelector("th"));
 
 		// Leitura dos campos das linhas de acordo com a validação desejada
+		waitLoadingCss(csstabelaRegistrosDadosPessoais);
 		WebElement tabelaRegistros = sfGetElementByCss(csstabelaRegistrosDadosPessoais);
 		List<WebElement> tr = tabelaRegistros.findElements(By.cssSelector("tr"));
 

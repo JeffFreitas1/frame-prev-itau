@@ -37,7 +37,7 @@ public class PageObjectUtils {
 	private Random random = new Random();
 
 	public void sfMoveToElementClickCss(String fieldName) throws Exception {
-		Thread.sleep(1000);
+		waitLoadingCss(fieldName);
 		action = new Actions(driver);
 		hoverClick.accept(By.cssSelector(fieldName));
 	}
@@ -272,6 +272,14 @@ public class PageObjectUtils {
 			return true;
 	}
 	
+	public boolean sfIsElementPresentCss(String fieldName) throws Exception {
+		waitLoadPage();
+		if (sfGetElementCss(fieldName) == null)
+			return false;
+		else
+			return true;
+	}
+	
 	public boolean sfIsElementPresentOtherElement(String element, String findElement) throws Exception {
 		return sfGetElement(element).findElement(By.xpath(findElement)).isEnabled();
 	}
@@ -402,7 +410,8 @@ public class PageObjectUtils {
 	}
 
 	public void sfMoveToElementClick(String fieldName) throws Exception {
-		waitLoadPage();
+		waitLoading(fieldName);
+		sfStepConfig(500, fieldName);
 		action = new Actions(driver);
 		hoverClick.accept(By.xpath(fieldName));
 	}
@@ -421,6 +430,7 @@ public class PageObjectUtils {
 	}
 
 	public void waitElementInvisibility(String fieldName) throws Exception {
+		waitLoadPage();
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(fieldName)));
 	}
 
@@ -439,7 +449,6 @@ public class PageObjectUtils {
 	}
 
 	public void waitLoadingCss(String fieldName) throws Exception {
-		waitLoadPage();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(fieldName)));
 	}
 

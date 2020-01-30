@@ -9,6 +9,9 @@ public class LifeCertificadoDetalheElementMap extends PageObjectUtils {
 	
 	
 	protected String xpathCertificadoPage = "//span[@id='dlgCertificado_title']";
+	
+	protected String xpathCertificadoPlano="//span[@id='frmCertificate:dlgComposicao_title']";
+	
 
 	// Quantidade de registros
 	protected String quantidadeRegistros = "//label[contains(.,'Total de registros: 1')]";

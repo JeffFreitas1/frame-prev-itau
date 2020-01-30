@@ -3,7 +3,6 @@ package br.com.cardif.life.steps;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +20,6 @@ import br.com.cardif.life.page.LifeCertificadoDetalhePage;
 import br.com.cardif.life.page.LifeClienteDadosPessoaisPage;
 import br.com.cardif.life.page.LifeClienteDetalhePage;
 import br.com.cardif.life.page.LifeClienteEnderecosPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
@@ -59,15 +57,17 @@ public class LifeGraficaSteps {
 	@Entao("^deve ser realizada a busca do cliente por Contrato e validado$")
 	public void deve_ser_realizada_a_busca_do_cliente_por_Contrato_e_validado() throws Throwable {
 
-		lifeconsultacliente = new LifeConsultaClientePage();
+		
 		FileWriter arquivoLog = new FileWriter(
 				TestRule.getPathCenarioEvidencia().concat("\\logRelatorioContasTransitorias.txt"), true);
 		PrintWriter gravarArq = new PrintWriter(arquivoLog);
 		boolean arquivoValido;
+		lifeconsultacliente = new LifeConsultaClientePage();
 
 		for (int indexRelatorio = 0; indexRelatorio < list.size(); indexRelatorio++) {
 			Double totalDoPremio = 0.0;
 			String contrato = list.get(indexRelatorio).getContrato().trim();
+			lifeconsultacliente.waitLoadPage();
 			lifeconsultacliente.pesquisarClienteContrato(contrato);
 			Map<String, String> endereco = new HashMap<>();
 			Map<String, String> dadosPessoais = new HashMap<>();
@@ -77,8 +77,8 @@ public class LifeGraficaSteps {
 			// Validando informações do cliente
 			reportRegistroGrafica.validar(StringUtils.removeCaracteresEspeciais(dadosPessoais.get("Data de Nascimento")),
 					reportRegistroGrafica.LimparData(list.get(indexRelatorio).getDtNacimento()), "Campo : dtNacimento", gravarArq, indexRelatorio);
-			reportRegistroGrafica.validar(StringUtils.removeCaracteresEspeciais( dadosPessoais.get("CPF/CNPJ")),
-					list.get(indexRelatorio).getCpfCnpj().substring(3), "Campo : CPF", gravarArq, indexRelatorio);
+			reportRegistroGrafica.validar(StringUtils.removeCaracteresEspeciais(dadosPessoais.get("CPF/CNPJ")),
+					list.get(indexRelatorio).getCpfCnpj().trim(), "Campo : CPF", gravarArq, indexRelatorio);
 			reportRegistroGrafica.validar(dadosPessoais.get("Nome").trim(), list.get(indexRelatorio).getNome().trim(),
 					"Campo : Nome", gravarArq, indexRelatorio);
 

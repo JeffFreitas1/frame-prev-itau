@@ -121,7 +121,7 @@ public class TestRule {
 
 		//driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 60);
 		capabilities = ((RemoteWebDriver) driver).getCapabilities();
 	}
 
