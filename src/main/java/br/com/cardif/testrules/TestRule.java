@@ -119,7 +119,7 @@ public class TestRule {
 			throw new Exception("Nome do driver não encontrado: " + driverName);
 		}
 
-		//driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		wait = new WebDriverWait(driver, 10);
 		capabilities = ((RemoteWebDriver) driver).getCapabilities();
