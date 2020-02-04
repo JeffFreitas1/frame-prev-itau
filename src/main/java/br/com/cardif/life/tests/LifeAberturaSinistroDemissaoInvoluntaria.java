@@ -6,7 +6,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "c:/temp/features/", tags = "@aberturasinistrolifedemissaoinvoluntaria", glue = {
+@CucumberOptions(features = "c:/temp/features/LifeAberturaSinistros/", tags = "@aberturasinistrolifedemissaoinvoluntaria", glue = {
 		"br.com.cardif.life.tests.steps", "br.com.cardif.testrules" }, monochrome = true, dryRun = false)
 public class LifeAberturaSinistroDemissaoInvoluntaria {
 

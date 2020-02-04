@@ -30,7 +30,13 @@ public class LifeSinistroDocumentosPage extends LifeSinistroDocumentosElementMap
 	public void preencherCampoDocumento () throws Exception {
 	sfClick(dropDownDocumento);
 	sfSendText(campoPesquisaTiposDocumentos, "Email/Protocolo");
+	sfMoveToElementClick(serlecionarEmailProtocolo);	
 	sfClick(botaoOkDocumento);
+	sfClick(botaoSalvar);
+	waitLoadingElement(botaoOkVisualizado);
+	sfClick(botaoOkVisualizado);
+	waitLoadPage();
+	
 
 	}
 }

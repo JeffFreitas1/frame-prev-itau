@@ -105,15 +105,30 @@ public class LifeHomePage extends LifeHomeElementMap {
 	
 	public void acessarMenuTransacoesSinistroAnaliseSinistro() throws Exception {
 		sfNavigateDropDownMenu(menuTrancacoes);
-		sfNavigateDropDownMenu(opcaoTrancacaoSinistro);
+		sfNavigateDropDownMenu(opcaoTransacaoSinistro);
 		//sfNavigateDropDownMenu(opcaoAnaliseSinistro);
 		sfClick(opcaoAnaliseSinistro);
 		sfSwitchFrame(getIdFrame());
 	}
 	
+	public void acessarMenuTransacoesSinistroImportacaoDeDocumentos() throws Exception {
+		sfNavigateDropDownMenu(menuTrancacoes);
+		sfNavigateDropDownMenu(opcaoTransacaoSinistro);
+		sfClick(opcaoImportacaoDeDocumentos);
+		sfSwitchFrame(getIdFrame());
+	}
+	
+	public void acessarMenuRelatoriosCartaPendentes() throws Exception {
+		sfNavigateDropDownMenu(menuRelatorios);
+		sfNavigateDropDownMenu(opcaoCarta);
+		//sfNavigateDropDownMenu(opcaoPendentes);
+		sfClick(opcaoCartasPendentes);
+		sfSwitchFrame(getIdFrame());
+	}
+	
 	public void acessarTrancacoesAutorizacaoPagamento() throws Exception{
 		sfNavigateDropDownMenu(menuTrancacoes);
-		sfNavigateDropDownMenu(opcaoTrancacaoSinistro);
+		sfNavigateDropDownMenu(opcaoTransacaoSinistro);
 		sfClick(opcaoTrancacaoAutorizacaoPagamento);
 		waitLoading(abaAutorizacaoPagamento);
 		sfSwitchFrame(getIdFrame());

@@ -4,6 +4,7 @@ import org.junit.Assert;
 
 import br.com.cardif.life.page.LifeConsultaSinistroPage;
 import br.com.cardif.life.page.LifeHomePage;
+import br.com.cardif.life.page.LifeImpressaoDasCartasPage;
 import br.com.cardif.life.page.LifeLoginPage;
 import br.com.cardif.life.page.LifeSinistroDocumentosPage;
 import br.com.cardif.life.page.LifeSinistroSituacaoSinistroPage;
@@ -31,7 +32,7 @@ public class RegulacaoSinistrosLife {
 	@Entao("^o Numero do Sinistro devera ser consultado$")
 	public void o_Numero_do_Sinistro_devera_ser_consultado() throws Throwable {
 		LifeConsultaSinistroPage lifeConsultaSinistroPage = new LifeConsultaSinistroPage();
-		lifeConsultaSinistroPage.consultarSinistro("1055498");
+		lifeConsultaSinistroPage.consultarSinistro("1066413");
 	}
 
 	@Entao("^dar um duplo clique na linha apresentada$")
@@ -77,41 +78,23 @@ public class RegulacaoSinistrosLife {
 		lifeSinistroDocumentosPage.preencherCampoDocumento();
 	}
 
-
-	@Entao("^marcar o sinistro como visualizado clicando no botao Sim$")
-	public void marcar_o_sinistro_como_visualizado_clicando_no_botao_Sim() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
-
 	@Entao("^consultar novamente o numero de sinistro validando o status Pendente por documentos$")
 	public void consultar_novamente_o_numero_de_sinistro_validando_o_status_Pendente_por_documentos() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+		LifeSinistroSituacaoSinistroPage lifeSinistroSituacaoSinistroPage = new LifeSinistroSituacaoSinistroPage();
+	    lifeSinistroSituacaoSinistroPage.validarStatusDoSinistro();
 	}
 
-	@Entao("^acessar o menu Relatorios - Carta - Pendentes selecionar a opcao Por Tipo$")
-	public void acessar_o_menu_Relatorios_Carta_Pendentes_selecionar_a_opcao_Por_Tipo() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	@Entao("^acessar o menu Relatorios - Carta - Pendentes$")
+	public void acessar_o_menu_Relatorios_Carta_Pendentes() throws Throwable {
+		LifeHomePage lifeHomePage = new LifeHomePage();
+		lifeHomePage.acessarMenuRelatoriosCartaPendentes();
 	}
 
-	@Entao("^no campo Tipo de Carta informar Solicitacao de Documentos$")
-	public void no_campo_Tipo_de_Carta_informar_Solicitacao_de_Documentos() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
-
-	@Entao("^no campo Cod\\. Sinistro informe o numero do sinistro utilizado anteriormente e clicar no botao Gerar Relatorio$")
-	public void no_campo_Cod_Sinistro_informe_o_numero_do_sinistro_utilizado_anteriormente_e_clicar_no_botao_Gerar_Relatorio() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
-
-	@Entao("^clicar no botao Imprimir sera gerado um arquivo para download$")
-	public void clicar_no_botao_Imprimir_sera_gerado_um_arquivo_para_download() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	
+	@Entao("^selecionar a opcao por tipo no campo Tipo de Carta informar Solicitacao de Documentos preenchendo os campos solicitados clicando em imprimir$")
+	public void selecionar_a_opcao_por_tipo_no_campo_Tipo_de_Carta_informar_Solicitacao_de_Documentos_preenchendo_os_campos_solicitados_clicando_em_imprimir() throws Throwable {
+		LifeImpressaoDasCartasPage lifeImpressaoDasCartasPage = new LifeImpressaoDasCartasPage();
+	    lifeImpressaoDasCartasPage.preencherSolicitacaoDeDocumentos();
 	}
 
 	@Entao("^clicar no botao Nao na caixa de atencao apresentada$")
