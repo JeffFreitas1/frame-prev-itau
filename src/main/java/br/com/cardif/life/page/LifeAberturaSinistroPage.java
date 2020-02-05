@@ -66,17 +66,16 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 	}
 
 	public String aberturaSinistroDesemprego(List<Map<String, String>> formulario) throws Exception {
-		// sfClick(listaRazaoAbertura);
-		// sfClick(razaoAbertura.replace("@RAZAOABERTURA",
-		// Utils.getValorFormulario("Razão Abertura", formulario)));
-		sfZoomOut();
 		sfClick(listaRisco);
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
-		// sfSendText(dtDataAviso, Utils.getValorFormulario("Data Aviso", formulario));
-		sfSendText(dtDataOcorrencia, Utils.getValorFormulario("Data Afastamento", formulario));
-
-		sfSendText(dtDataAdmissao, Utils.getValorFormulario("Data Admissao", formulario));
-		sfSendText(dtDataAvisoPrevio, Utils.getValorFormulario("Data Aviso Previo", formulario));
+		SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+		Date dateMes = Date.from(ZonedDateTime.now().minusMonths(1).toInstant());
+		formatoData.format(dateMes);
+		sfSendText(dtDataOcorrencia,formatoData.format(dateMes)); //Data afastamento
+		Date dateAno = Date.from(ZonedDateTime.now().minusYears(2).toInstant());
+		formatoData.format(dateAno);
+		sfSendText(dtDataAdmissao, formatoData.format(dateAno));
+		sfSendText(dtDataAvisoPrevio, formatoData.format(dateMes));
 		sfSendText(txtPis, Utils.getValorFormulario("PIS", formulario));
 		sfSendText(txtCNPJ, Utils.getValorFormulario("CNPJ", formulario));
 		sfClick(txtCNPJ);

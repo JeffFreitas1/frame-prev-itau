@@ -109,6 +109,14 @@ public class LifeConsultaSinistroPage extends LifeConsultaSinistroElementMap {
 		sfClick(abaDocumentosProcesso);
 		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Situação de Sinistro");
 	}
+	
+	public void acessarAbaFavorecidos() throws Exception {
+		waitLoadingElement(abaFavorecidos);
+		sfClick(abaFavorecidos);
+		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Situação de Sinistro");
+	}
+	
+	
 	public void clicarBotaoAlterar () throws Exception {
 		sfZoomOut();
 		waitLoadingElement(botaoAlterarDadosSinistro);

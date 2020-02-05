@@ -134,6 +134,14 @@ public class LifeHomePage extends LifeHomeElementMap {
 		sfSwitchFrame(getIdFrame());
 	}
 	
+	public void acessarTrancacoesSinistroImportacaoDeDocumentos() throws Exception{
+		sfNavigateDropDownMenu(menuTrancacoes);
+		sfNavigateDropDownMenu(opcaoTransacaoSinistro);
+		sfClick(opcaoImportacaoDeDocumentos);
+		sfSwitchFrame(getIdFrame());
+		
+	}
+	
 	
 	public void fecharAba() throws Exception{
 		driver.navigate().refresh();
