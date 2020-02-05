@@ -24,11 +24,15 @@ public class LifeHomeElementMap extends PageObjectUtils {
 	protected String opcaoRelatorioRepasse = "//span[contains(.,'Relatório Repasse')]";
 	protected String opcaoPagamentoContabilidade = "//span[contains(.,'Pagamento/Contabilidade')]";
 	protected String opcaoRelatorioTaxas = "//span[contains(.,'Relatório Taxas')]";
-	protected String opcaoTrancacaoSinistro = "(//span[contains(.,'Sinistro')])[4]";
+	protected String opcaoTransacaoSinistro = "(//span[contains(.,'Sinistro')])[4]";
+	protected String opcaoImportacaoDeDocumentos = "//a[contains(.,'Importação de Documentos')];";
 	protected String opcaoTrancacaoAutorizacaoPagamento = "(//span[@class='ui-menuitem-text'][contains(.,'Autorização de Pagamentos')])[1]";
+	protected String opcaoCarta = "(//span[@class='ui-menuitem-text'][contains(.,'Carta')])[4]";
 	protected String abaAutorizacaoPagamento="(//a[contains(.,'Autorização de Pagamentos')])[3]";
 	protected String botaoFecharAba = "//span[@class='ui-icon ui-icon-close']";
 	protected String opcaoTransacaoCliente = "(//span[@class='ui-menuitem-text'][contains(.,'Clientes')])[2]";
+	protected String opcaoAnaliseSinistro = "(//span[@class='ui-menuitem-text'][contains(.,'Análise de Sinistro')])";
+	protected String opcaoCartasPendentes = "(//span[contains(.,'Pendentes')])[2]";
 	
 	
 	// Xpath Imagem carregamento

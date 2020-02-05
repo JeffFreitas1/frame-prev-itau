@@ -37,6 +37,8 @@ public class LifeConsultaSinistroElementMap extends PageObjectUtils {
 	protected WebElement abaDespesasExtras;
 	@FindBy(xpath = "//form[@id='frmClaimMaintenance']/div[@id='frmClaimMaintenance:tabs']/ul/li/a[text() = 'Documentos do Processo']")
 	protected WebElement abaDocumentosProcesso;
+	@FindBy(xpath = "//a[contains(.,'Situação de Sinistro')]")
+	protected WebElement abaSituacaoSinistro;
 	@FindBy(xpath = "//button[@name='frmClaimMaintenance:cmdCloseClaimMaintenance']")
 	protected WebElement botaoFecharDadosSinistro;
 	@FindBy(xpath = "//button[@name='frmClaimMaintenance:cmdChangeClaimMaintenance']")

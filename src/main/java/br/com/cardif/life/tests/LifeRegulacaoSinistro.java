@@ -5,9 +5,10 @@ import org.junit.runner.RunWith;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
+
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "c:/temp/features/LifeAberturaSinistros/", tags = "@aberturasinistrolifedemissaoinvoluntaria", glue = {
+@CucumberOptions(features = "c:/temp/features/LifeRegulacaoSinistro", tags = "@regulacaosinistrovidadesemprego", glue = {
 		"br.com.cardif.life.tests.steps", "br.com.cardif.testrules" }, monochrome = true, dryRun = false)
-public class LifeAberturaSinistroDemissaoInvoluntaria {
+public class LifeRegulacaoSinistro {
 
 }

@@ -1,8 +1,5 @@
 package br.com.cardif.life.tests;
 
-
-
-
 import org.junit.runner.RunWith;
 
 

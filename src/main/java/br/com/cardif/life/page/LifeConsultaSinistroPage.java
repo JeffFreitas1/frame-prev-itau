@@ -2,11 +2,14 @@ package br.com.cardif.life.page;
 
 
 import java.util.List;
-
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Sleeper;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import br.com.cardif.life.map.LifeConsultaSinistroElementMap;
 import br.com.cardif.life.map.LifeHomeElementMap;
@@ -39,14 +42,31 @@ public class LifeConsultaSinistroPage extends LifeConsultaSinistroElementMap {
 		WebElement tabelaRegistros = sfGetElementByCss(registrosConsultaSinistro);
 		List<WebElement> tr = tabelaRegistros.findElements(By.cssSelector("tr"));
 		sfDoubleClick(tr.stream().findFirst().get());
-		waitLoading(menuSinistro);
-		if (sfIsElementPresent(mensagemAviso)) {
-			sfMoveToElementClick(botaoOKAviso);
-		}
+		//waitLoading(menuSinistro);
+	
+		//if (sfIsElementPresent(mensagemAviso)) {
+		//	sfMoveToElementClick(botaoOKAviso);
+		//}
 		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Detalhes do Sinistro");
 	}
 
 	public boolean validarSituacaoSinistro(String situacao) throws Exception {
+		boolean situacaoSinistro = false;
+		
+		// Mapeamento dos campos da tabela de certificados
+		int indexStatusSinistro = sfGetXPathCount(indexColunaSinistro.replace("@NOME_COLUNA", "Status Sinistro")) + 1;
+
+		sfMoveToElement(valorColunaSinistro.replaceAll("@INDEX",
+				Integer.toString(indexStatusSinistro)));
+		String valorStatusSinistro = sfGetText(valorColunaSinistro
+				.replaceAll("@INDEX", Integer.toString(indexStatusSinistro))).trim();
+		
+		situacaoSinistro=valorStatusSinistro.equals(situacao);
+		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Situação do Sinistro");
+		return situacaoSinistro;
+	}
+	
+	public boolean validarNumeroSinistro(String situacao) throws Exception {
 		boolean situacaoSinistro = false;
 		
 		// Mapeamento dos campos da tabela de certificados
@@ -78,5 +98,22 @@ public class LifeConsultaSinistroPage extends LifeConsultaSinistroElementMap {
 		sfClick(abaCoberturaValores);
 		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Cobertura Valores");
 	}
+	public void acessarSituacaoSinistro() throws Exception {
+		waitLoadingElement(abaSituacaoSinistro);
+		sfClick(abaSituacaoSinistro);
+		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Situação de Sinistro");
+	}
+	
+	public void acessarAbaDocumentosDoProcesso() throws Exception {
+		waitLoadingElement(abaDocumentosProcesso);
+		sfClick(abaDocumentosProcesso);
+		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Situação de Sinistro");
+	}
+	public void clicarBotaoAlterar () throws Exception {
+		sfZoomOut();
+		waitLoadingElement(botaoAlterarDadosSinistro);
+		sfClick(botaoAlterarDadosSinistro);
+	}
 
 }
+

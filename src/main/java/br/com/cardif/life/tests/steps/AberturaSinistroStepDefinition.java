@@ -1,4 +1,4 @@
-	package br.com.cardif.life.tests.steps;
+package br.com.cardif.life.tests.steps;
 
 import java.util.List;
 import java.util.Map;
@@ -7,6 +7,9 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import br.com.cardif.databaseutils.DatabaseName;
+import br.com.cardif.databaseutils.jdbc.DatabaseUtils;
+import br.com.cardif.databaseutils.jdbc.queries.Queries;
 import br.com.cardif.life.page.LifeAberturaSinistroPage;
 import br.com.cardif.life.page.LifeConsultaClientePage;
 import br.com.cardif.life.page.LifeHomePage;
@@ -41,7 +44,8 @@ public class AberturaSinistroStepDefinition {
 	@E("^preenchendo o Campo Certificado$")
 	public void preenchendo_o_campo_certificado() throws Throwable {
 		LifeConsultaClientePage lifeConsultaClientePage = new LifeConsultaClientePage();
-		lifeConsultaClientePage.pesquisarClienteCertificado("861040008");
+		String cd = DatabaseUtils.searchOneLineOneColumn(Queries.BUSCA_CERTIF_VIDA_DESEMPREGO_SEM_SINISTRO, DatabaseName.CARDIF);
+		lifeConsultaClientePage.pesquisarClienteCertificado(cd);
 
 	}
 
