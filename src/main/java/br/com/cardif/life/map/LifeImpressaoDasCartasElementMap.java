@@ -8,6 +8,7 @@ public class LifeImpressaoDasCartasElementMap extends PageObjectUtils {
 	protected String botaoPorTipo = "//label[contains(.,'Por tipo')]";
 	protected String botaoGerarRelatorio = "//span[contains(.,'Gerar Relatório')]";
 	protected String botaoImrpimir = "(//span[contains(.,'Imprimir')])[2]";
+	protected String botaoNaoEnviarCarta = "(//span[contains(.,'Não')])[1]";
 	//DropDown
 	protected String tipoCartaDropDown = "//label[@id='frmLetterPrint:selLetterType_label']";
 	//Campo Pesquisa

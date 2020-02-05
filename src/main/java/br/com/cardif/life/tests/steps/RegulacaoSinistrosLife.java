@@ -2,12 +2,16 @@ package br.com.cardif.life.tests.steps;
 
 import org.junit.Assert;
 
+import br.com.cardif.databaseutils.DatabaseName;
+import br.com.cardif.databaseutils.jdbc.DatabaseUtils;
+import br.com.cardif.databaseutils.jdbc.queries.Queries;
 import br.com.cardif.life.page.LifeConsultaSinistroPage;
 import br.com.cardif.life.page.LifeHomePage;
 import br.com.cardif.life.page.LifeImpressaoDasCartasPage;
 import br.com.cardif.life.page.LifeLoginPage;
 import br.com.cardif.life.page.LifeSinistroDocumentosPage;
 import br.com.cardif.life.page.LifeSinistroSituacaoSinistroPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Entao;
@@ -16,6 +20,7 @@ import cucumber.api.java.pt.Entao;
 
 public class RegulacaoSinistrosLife {
 	String statusSinistro;
+	String sinistroDemissao;
 
 	@Dado("^o acesso ao sistema life \"([^\"]*)\"$")
 	public void o_acesso_ao_sistema_life_ambiente(String ambiente) throws Throwable {
@@ -32,7 +37,8 @@ public class RegulacaoSinistrosLife {
 	@Entao("^o Numero do Sinistro devera ser consultado$")
 	public void o_Numero_do_Sinistro_devera_ser_consultado() throws Throwable {
 		LifeConsultaSinistroPage lifeConsultaSinistroPage = new LifeConsultaSinistroPage();
-		lifeConsultaSinistroPage.consultarSinistro("1066413");
+		sinistroDemissao = DatabaseUtils.searchOneLineOneColumn(Queries.BUSCA_SINISTRO_VIDA_DESEMPREGO, DatabaseName.CARDIF);
+		lifeConsultaSinistroPage.consultarSinistro(sinistroDemissao);
 	}
 
 	@Entao("^dar um duplo clique na linha apresentada$")
@@ -94,8 +100,9 @@ public class RegulacaoSinistrosLife {
 	@Entao("^selecionar a opcao por tipo no campo Tipo de Carta informar Solicitacao de Documentos preenchendo os campos solicitados clicando em imprimir$")
 	public void selecionar_a_opcao_por_tipo_no_campo_Tipo_de_Carta_informar_Solicitacao_de_Documentos_preenchendo_os_campos_solicitados_clicando_em_imprimir() throws Throwable {
 		LifeImpressaoDasCartasPage lifeImpressaoDasCartasPage = new LifeImpressaoDasCartasPage();
-	    lifeImpressaoDasCartasPage.preencherSolicitacaoDeDocumentos();
-	}
+	    lifeImpressaoDasCartasPage.preencherSolicitacaoDeDocumentos(sinistroDemissao);
+	}	
+
 
 	@Entao("^clicar no botao Nao na caixa de atencao apresentada$")
 	public void clicar_no_botao_Nao_na_caixa_de_atencao_apresentada() throws Throwable {
