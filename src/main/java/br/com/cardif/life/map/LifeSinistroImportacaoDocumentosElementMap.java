@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 
 import br.com.cardif.utils.PageObjectUtils;
 
-public class LifeSinistroImportacaoDocumentos extends PageObjectUtils {
+public class LifeSinistroImportacaoDocumentosElementMap extends PageObjectUtils {
 	
 	//Botoes
 	protected String botaoImportar = "//input[contains(@name,'frmClaimDocumentImport:j_id_1e_input')]";
