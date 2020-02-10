@@ -89,7 +89,6 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 	}
 
 	public String aberturaSinistroDesempregoInvoluntario(List<Map<String, String>> formulario) throws Exception {
-		;
 		sfZoomOut();
 		sfClick(listaRisco);
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));

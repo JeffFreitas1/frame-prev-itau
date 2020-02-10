@@ -114,6 +114,7 @@ public class LifeHomePage extends LifeHomeElementMap {
 	public void acessarMenuTransacoesSinistroImportacaoDeDocumentos() throws Exception {
 		sfNavigateDropDownMenu(menuTrancacoes);
 		sfNavigateDropDownMenu(opcaoTransacaoSinistro);
+		sfNavigateDropDownMenu(opcaoImportacaoDeDocumentos);
 		sfClick(opcaoImportacaoDeDocumentos);
 		sfSwitchFrame(getIdFrame());
 	}

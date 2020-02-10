@@ -44,10 +44,27 @@ public class AberturaSinistroStepDefinition {
 	@E("^preenchendo o Campo Certificado$")
 	public void preenchendo_o_campo_certificado() throws Throwable {
 		LifeConsultaClientePage lifeConsultaClientePage = new LifeConsultaClientePage();
-		String certificadoDocumento = DatabaseUtils
+		String certificadoDocumentoCardif = DatabaseUtils
 				.searchOneLineOneColumn(Queries.BUSCA_CERTIF_VIDA_DESEMPREGO_SEM_SINISTRO, DatabaseName.CARDIF);
-		lifeConsultaClientePage.pesquisarClienteCertificado(certificadoDocumento);
+		lifeConsultaClientePage.pesquisarClienteCertificado(certificadoDocumentoCardif);
+	}
 
+	@E("^preenchendo o Campo Certificado do ambiente BVP$")
+	public void preenchendo_o_Campo_Certificado_do_ambiente_BVP() throws Throwable {
+		LifeConsultaClientePage lifeConsultaClientePage = new LifeConsultaClientePage();
+		String certificadoDocumentoBvp = DatabaseUtils
+				.searchOneLineOneColumn(Queries.BUSCA_CERTIF_BVP_DESEMPREGO_INVOLUNT_SEM_SINISTRO, DatabaseName.BVP);
+		lifeConsultaClientePage.pesquisarClienteCertificado(certificadoDocumentoBvp);
+
+	}
+	
+	@Dado("^preenchendo o Campo Certificado do ambiente GARANTIAS$")
+	public void preenchendo_o_Campo_Certificado_do_ambiente_GARANTIAS() throws Throwable {
+		LifeConsultaClientePage lifeConsultaClientePage = new LifeConsultaClientePage();
+		String certificadoDocumentoGarantias =
+				DatabaseUtils.searchOneLineOneColumn(Queries.BUSCA_CERTIF_GARANTIAS_ROUBO_OU_FURTO_QUALIF_SEM_SINISTRO,
+				DatabaseName.GARANTIAS);
+		lifeConsultaClientePage.pesquisarClienteCertificado(certificadoDocumentoGarantias);
 	}
 
 	@E("^clicando no Botao Sinistro$")
@@ -65,7 +82,7 @@ public class AberturaSinistroStepDefinition {
 
 	@Entao("^a Janela Abertura de Sinistro sera aberta$")
 	public void a_Janela_Abertura_de_Sinistro_sera_aberta() throws Throwable {
-		LifeAberturaSinistroPage lifeAberturaSinistroPage = new LifeAberturaSinistroPage();
+		lifeAberturaSinistroPage = new LifeAberturaSinistroPage();
 		lifeAberturaSinistroPage.validaTituloPagina();
 
 	}
