@@ -25,7 +25,7 @@ public class LifeHomeElementMap extends PageObjectUtils {
 	protected String opcaoPagamentoContabilidade = "//span[contains(.,'Pagamento/Contabilidade')]";
 	protected String opcaoRelatorioTaxas = "//span[contains(.,'Relatório Taxas')]";
 	protected String opcaoTransacaoSinistro = "(//span[contains(.,'Sinistro')])[4]";
-	protected String opcaoImportacaoDeDocumentos = "//a[contains(.,'Importação de Documentos')];";
+	protected String opcaoImportacaoDeDocumentos = "//span[@class='ui-menuitem-text'][contains(.,'Importação de Documentos')]";
 	protected String opcaoTrancacaoAutorizacaoPagamento = "(//span[@class='ui-menuitem-text'][contains(.,'Autorização de Pagamentos')])[1]";
 	protected String opcaoCarta = "(//span[@class='ui-menuitem-text'][contains(.,'Carta')])[4]";
 	protected String abaAutorizacaoPagamento="(//a[contains(.,'Autorização de Pagamentos')])[3]";

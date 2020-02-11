@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -84,9 +85,10 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 		sfClick(botaoOkAberturaSinistro);
 		waitElementInvisibility(LifeHomeElementMap.loading);
 		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Abertura de Sinistro");
-		return getNumeroSinistro();
+		return getNumeroSinistro();	
+		}
 
-	}
+
 
 	public String aberturaSinistroDesempregoInvoluntario(List<Map<String, String>> formulario) throws Exception {
 		sfZoomOut();
@@ -252,7 +254,7 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 	public String getNumeroSinistro() throws Exception {
 
 		Map<String, Integer> cabecalho = new HashMap<>();
-		String numeroSinistro = null;
+		String numeroSinistro = "";
 
 		// Mapeamento dos campos da tabela de certificados
 		WebElement tabelaCabecalho = sfGetElementByCss(indexPolicyCertificateTable);

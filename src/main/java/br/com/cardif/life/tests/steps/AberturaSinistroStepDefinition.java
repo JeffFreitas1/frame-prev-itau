@@ -92,6 +92,7 @@ public class AberturaSinistroStepDefinition {
 			List<Map<String, String>> formulario) throws Throwable {
 		LifeAberturaSinistroPage lifeAberturaSinistroPage = new LifeAberturaSinistroPage();
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroDesemprego(formulario);
+		Assert.assertFalse(nrSinistro.isEmpty());
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
 
 	}
@@ -101,6 +102,7 @@ public class AberturaSinistroStepDefinition {
 			List<Map<String, String>> formulario) throws Throwable {
 		LifeAberturaSinistroPage lifeAberturaSinistroPage = new LifeAberturaSinistroPage();
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroDesempregoInvoluntario(formulario);
+		Assert.assertFalse(nrSinistro.isEmpty());
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
 
 	}
@@ -109,6 +111,7 @@ public class AberturaSinistroStepDefinition {
 	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_de_risco_desemprego_involuntario_BVP(
 			List<Map<String, String>> formulario) throws Throwable {
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroDesempregoInvoluntario(formulario);
+		Assert.assertFalse(nrSinistro.isEmpty());
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
 	}
 
@@ -116,6 +119,7 @@ public class AberturaSinistroStepDefinition {
 	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_morte(
 			List<Map<String, String>> formulario) throws Throwable {
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroMorte(formulario);
+		Assert.assertFalse(nrSinistro.isEmpty());
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
 	}
 
@@ -123,6 +127,7 @@ public class AberturaSinistroStepDefinition {
 	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_morte_BVP(
 			List<Map<String, String>> formulario) throws Throwable {
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroMorteBVP(formulario);
+		Assert.assertFalse(nrSinistro.isEmpty());
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
 	}
 
@@ -209,6 +214,7 @@ public class AberturaSinistroStepDefinition {
 	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_Roubo_ou_Furto_Qualificado_do_Aparelho_Movel(
 			List<Map<String, String>> formulario) throws Throwable {
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroRouboOuFurto(formulario);
+		Assert.assertFalse(nrSinistro.isEmpty());
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
 
 	}
