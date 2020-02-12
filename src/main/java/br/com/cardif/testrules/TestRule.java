@@ -35,6 +35,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -86,10 +87,14 @@ public class TestRule {
 			driver = new ChromeDriver();
 			break;
 		case "firefox":
-			
+			ProfilesIni profile = new ProfilesIni();
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
 			//firefoxOptions.addPreference("browser.download.folderList", 2);
 			firefoxOptions.addPreference("disable-popup-blocking", true);
+			FirefoxProfile firefoxProfile = profile.getProfile("default-release");
+			firefoxProfile.setPreference("dom.disable_open_during_load", false);
+			
+			firefoxOptions.setProfile(firefoxProfile);
 			//firefoxOptions.addPreference("browser.download.manager.showWhenStarting", false);
 			//firefoxOptions.addPreference("browser.download.dir", pathCenarioEvidencia);
 //			firefoxOptions.addPreference("browser.helperApps.neverAsk.saveToDisk",
