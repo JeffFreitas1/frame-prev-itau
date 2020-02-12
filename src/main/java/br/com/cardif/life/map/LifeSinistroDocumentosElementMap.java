@@ -15,8 +15,10 @@ public class LifeSinistroDocumentosElementMap extends PageObjectUtils {
 	protected WebElement botaoAlterarDadosSinistro;
 	@FindBy(xpath = "//button[contains(.,'Salvar')]")
 	protected WebElement botaoSalvar;
-	@FindBy(xpath = "//*[@id=\"frmQuestion:cmdYes\"]")
+	@FindBy(xpath = "(//span[@class='ui-button-text ui-c'][contains(.,'Sim')])[4]")
 	protected WebElement botaoOkVisualizado;
+	@FindBy(xpath = "(//span[@class='ui-button-text ui-c'][contains(.,'OK')])[7]")
+	protected WebElement botaoSinistroSalvo;
 	//Dropdowns
 	@FindBy(xpath = "//label[contains(@id,'frmClaimMaintenance:tabs:selDocument_label')]")
 	protected WebElement dropDownDocumento;

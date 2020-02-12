@@ -37,7 +37,6 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 
 	public String aberturaSinistro(List<Map<String, String>> formulario) throws Exception {
 		sfZoomOut();
-		sfZoomOut();
 		sfClick(listaRazaoAbertura);
 		sfClick(razaoAbertura.replace("@RAZAOABERTURA", Utils.getValorFormulario("Razão Abertura", formulario)));
 		sfSendText(dtDataAviso, Utils.getValorFormulario("Data Aviso", formulario));
@@ -90,7 +89,6 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 	}
 
 	public String aberturaSinistroDesempregoInvoluntario(List<Map<String, String>> formulario) throws Exception {
-		;
 		sfZoomOut();
 		sfClick(listaRisco);
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
@@ -238,12 +236,25 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 		return getNumeroSinistro();
 
 	}
-
-	public String aberturaSinistroRouboOuFurto(List<Map<String, String>> formulario) throws Exception {
+	
+	public String aberturaSinistroIftt(List<Map<String, String>> formulario) throws Exception {
 		sfZoomOut();
 		sfClick(listaRisco);
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
 		sfSendText(dtDataOcorrencia, Utils.getValorFormulario("Data Ocorrencia", formulario));
+		sfClick(botaoOkAberturaSinistro);
+		waitElementInvisibility(LifeHomeElementMap.loading);
+		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Abertura de Sinistro");
+		return getNumeroSinistro();
+
+	}
+
+	public String aberturaSinistroRouboOuFurto(List<Map<String, String>> formulario) throws Exception {
+		sfZoomOut();
+		sfClick(listaRisco);
+		sfSendText(dtDataOcorrencia, Utils.getValorFormulario("Data Ocorrencia", formulario));
+		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
+		waitElementInvisibility(LifeHomeElementMap.loading);
 		sfClick(botaoOkAberturaSinistro);
 		waitElementInvisibility(LifeHomeElementMap.loading);
 		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Abertura de Sinistro");

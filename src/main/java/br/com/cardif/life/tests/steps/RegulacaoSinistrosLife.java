@@ -8,6 +8,7 @@ import br.com.cardif.life.page.LifeImpressaoDasCartasPage;
 import br.com.cardif.life.page.LifeLoginPage;
 import br.com.cardif.life.page.LifeSinistroDocumentosPage;
 import br.com.cardif.life.page.LifeSinistroSituacaoSinistroPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Entao;

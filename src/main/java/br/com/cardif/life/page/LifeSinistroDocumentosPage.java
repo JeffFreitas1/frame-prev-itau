@@ -35,6 +35,8 @@ public class LifeSinistroDocumentosPage extends LifeSinistroDocumentosElementMap
 	sfClick(botaoSalvar);
 	waitLoadingElement(botaoOkVisualizado);
 	sfClick(botaoOkVisualizado);
+	waitLoadingElement(botaoSinistroSalvo);
+	sfClick(botaoSinistroSalvo);
 	waitLoadPage();
 	
 
