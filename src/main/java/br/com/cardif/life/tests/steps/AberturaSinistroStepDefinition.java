@@ -145,6 +145,13 @@ public class AberturaSinistroStepDefinition {
 		Assert.assertEquals(mensagemSemDataAviso, labelPopUp);
 		Utils.logInfo("O Sinistro não foi aberto devido a: " + labelPopUp);
 	}
+	
+	@Entao("^o sinistro nao devera ser aberto devido a data de aviso nao ter sido preenchida exibindo a mensagem \"([^\"]*)\"$")
+	public void o_sinistro_nao_devera_ser_aberto_devido_a_data_de_aviso_nao_ter_sido_preenchida_exibindo_a_mensagem(
+			String mensagemSemDataAviso) throws Throwable {
+		Assert.assertEquals(mensagemSemDataAviso, labelPopUp);
+		Utils.logInfo("O Sinistro não foi aberto devido a: " + labelPopUp);
+	}
 
 	@Entao("^o sinistro devera ser preenchido com as informacoes do formulario com a data de aviso maior que a atual$")
 	public void o_sinistro_devera_ser_preenchido_com_as_informacoes_do_formulario_com_a_data_de_aviso_maior_que_a_atual(
@@ -209,6 +216,13 @@ public class AberturaSinistroStepDefinition {
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroIfttNatuerzaNaoPreenchida(formulario);
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
 	}
+	
+	@Entao("^o sinistro devera ser aberto de acordo com as informacoes do formulario do risco iftt sem natureza$")
+	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_iftt_sem_natureza(List<Map<String, String>> formulario) throws Throwable {
+		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroIfttNatuerzaNaoPreenchida(formulario);
+		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
+	}
+
 
 	@Entao("^o sinistro devera ser aberto de acordo com as informacoes do formulario do risco Roubo ou Furto Qualificado do Aparelho Movel$")
 	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_Roubo_ou_Furto_Qualificado_do_Aparelho_Movel(

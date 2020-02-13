@@ -5,6 +5,7 @@ import org.junit.Assert;
 import br.com.cardif.databaseutils.DatabaseName;
 import br.com.cardif.databaseutils.jdbc.DatabaseUtils;
 import br.com.cardif.databaseutils.jdbc.queries.Queries;
+import br.com.cardif.life.model.LifeImportacaoDeDocumentosPage;
 import br.com.cardif.life.page.LifeConsultaSinistroPage;
 import br.com.cardif.life.page.LifeHomePage;
 import br.com.cardif.life.page.LifeImpressaoDasCartasPage;
@@ -108,10 +109,12 @@ public class RegulacaoSinistrosLife {
 		lifeHomePage.acessarMenuTransacoesSinistroImportacaoDeDocumentos();
 	}
 
-	@Entao("^informar o numero de sinistro$")
-	public void informar_o_numero_de_sinistro() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	@Entao("^fazer o upload de uma imagem nos formatos aceitos$")
+	public void fazer_o_upload_de_uma_imagem_nos_formatos_aceitos() throws Throwable {
+	LifeImportacaoDeDocumentosPage lifeImportacaoDeDocumentosPage = new LifeImportacaoDeDocumentosPage();
+	sinistroDemissao = DatabaseUtils.searchOneLineOneColumn(Queries.BUSCA_SINISTRO_VIDA_DESEMPREGO,
+			DatabaseName.CARDIF);
+	lifeImportacaoDeDocumentosPage.consultaCampoSinsitro(sinistroDemissao);
 	}
 
 	@Entao("^validar a mensagem Arquivos importados com sucesso!$")

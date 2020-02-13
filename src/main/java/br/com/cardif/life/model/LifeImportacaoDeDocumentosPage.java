@@ -14,6 +14,7 @@ public class LifeImportacaoDeDocumentosPage extends LifeSinistroImportacaoDocume
 	}
 
 	public void consultaCampoSinsitro(String strNumeroSinistro) throws Exception {
+		waitElementInvisibility(campoNumeroSinsitro);
 		sfSendText(campoNumeroSinsitro, strNumeroSinistro);
 		sfClick(botaoImportar);
 		rbUploadFile("C:\\Users\\d55443\\Downloads\\indice.jpg");
