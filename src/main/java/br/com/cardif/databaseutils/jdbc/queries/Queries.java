@@ -3,7 +3,7 @@ package br.com.cardif.databaseutils.jdbc.queries;
 public class Queries {
 	
 
-	// *** Inï¿½cio das consultas da base VIDA. ***
+	// *** Início das consultas da base VIDA. ***
 	public static final String BUSCA_CERTIF_VIDA_DESEMPREGO_SEM_SINISTRO =
 		" select top 1 pc.policy_no " +
 		" from policy_certificate pc (nolock) " +
@@ -145,20 +145,24 @@ public class Queries {
 	
 	
 	
-	// *** Inï¿½cio das consultas da base BVP. ***
+	// *** Início das consultas da base BVP. ***
 	public static final String BUSCA_CERTIF_BVP_DESEMPREGO_INVOLUNT_SEM_SINISTRO =
 		" select top 1 pc.policy_no " +
 		" from policy_certificate pc (nolock) " +
 		" inner join master_policy mp (nolock) on mp.mp_no = pc.mp_no and mp.mp_endors_no = pc.mp_endors_no " +
+		" inner join partner p (nolock) on p.partner_id = mp.partner_id " +
+		" inner join letter l (nolock) on l.partner_id = p.partner_id " +
 		" left join claim c (nolock) on c.policy_no = pc.policy_no " +
 		" inner join pc_prod_rsk_covrge_plans pcx (nolock) on pcx.policy_no = pc.policy_no and pcx.polcrt_endors_no = pc.polcrt_endors_no and pcx.risk_id = 8 " +
 		" where c.policy_no is null " +
+		" and pc.polcrt_instmnt_vl is null " +
 		" and pc.polst_id = 1 " +
-		" and pc.polcrt_ins_dtm > '20170101' " +
+		" and pc.polcrt_ins_dtm > '20180101' " +
 		" and getdate() between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
 		" and pc.polcrt_del_fg = 'N' " +
 		" and mp.mp_del_fg = 'N' " +
-		" and pcx.pcprcpln_del_fg = 'N'  ";
+		" and pcx.pcprcpln_del_fg = 'N' " +
+		" and l.letter_del_fg = 'N' and l.letter_name like '%documento%' ";
 	
 	public static final String BUSCA_CERTIF_BVP_INCAPAC_FISICA_TOTAL_TEMP_SEM_SINISTRO =
 		" select top 1 pc.policy_no " +
@@ -194,11 +198,18 @@ public class Queries {
 		"where risk_id = 9 " +
 		"and clmst_id = 1 " +
 		"order by claim_no desc ";
+	
+	public static final String BUSCA_SINISTRO_BVP_DESEMPREGO_INVOL_SEM_SINISTRO =
+		"select top 1 claim_no " +
+		"from claim (nolock) " +
+		"where risk_id = 8 " +
+		"and clmst_id = 1 " +
+		"order by claim_no desc ";
 	// *** Fim das consultas da base BVP. ***
 	
 	
 	
-	// *** Inï¿½cio das consultas da base GARANTIAS. ***
+	// *** Início das consultas da base GARANTIAS. ***
 	public static final String BUSCA_CERTIF_GARANTIAS_ROUBO_OU_FURTO_QUALIF_SEM_SINISTRO =
 		" select distinct top 1 pc.policy_no " +
 		" from policy_certificate pc (nolock) " +

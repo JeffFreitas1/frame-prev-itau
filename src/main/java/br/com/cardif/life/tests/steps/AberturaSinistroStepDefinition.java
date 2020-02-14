@@ -40,17 +40,36 @@ public class AberturaSinistroStepDefinition {
 		LifeHomePage lifeHomePage = new LifeHomePage();
 		lifeHomePage.acessarMenuTransacoesCliente();
 	}
-
-	@E("^preenchendo o Campo Certificado$")
-	public void preenchendo_o_campo_certificado() throws Throwable {
+	
+	@Dado("^preenchendo o Campo Certificado$")
+	public void preenchendo_o_Campo_Certificado() throws Throwable {
 		LifeConsultaClientePage lifeConsultaClientePage = new LifeConsultaClientePage();
-		String certificadoDocumentoCardif = DatabaseUtils
-				.searchOneLineOneColumn(Queries.BUSCA_CERTIF_VIDA_DESEMPREGO_SEM_SINISTRO, DatabaseName.CARDIF);
-		lifeConsultaClientePage.pesquisarClienteCertificado(certificadoDocumentoCardif);
+		String certificadoDocumentoCardif = DatabaseUtils.searchOneLineOneColumn(Queries.BUSCA_CERTIF_VIDA_DESEMPREGO_SEM_SINISTRO, DatabaseName.CARDIF);
+	    lifeConsultaClientePage.pesquisarClienteCertificado(certificadoDocumentoCardif);
 	}
 
+	@E("^preenchendo o Campo Certificado com um numero aleatorio com o tipo de risco morte$")
+	public void preenchendo_o_campo_certificado_com_um_numero_aleatorio_com_o_tipo_de_risco_morte() throws Throwable {
+		LifeConsultaClientePage lifeConsultaClientePage = new LifeConsultaClientePage();
+		String certificadoDocumentoCardif = DatabaseUtils.searchOneLineOneColumn(Queries.BUSCA_CERTIF_BVP_DESEMPREGO_INVOLUNT_SEM_SINISTRO, DatabaseName.BVP);
+		lifeConsultaClientePage.pesquisarClienteCertificado(certificadoDocumentoCardif);
+	}
+	
+	@E("^preenchendo o Campo Certificado o numero de uma apolice especifica \"([^\"]*)\"$")
+	public void preenchendo_o_Campo_Certificado_o_numero_de_uma_apolice_especifica(String apolice) throws Throwable {
+		LifeConsultaClientePage lifeConsultaClientePage = new LifeConsultaClientePage();
+		String certificadoDocumentoCardifApolice = DatabaseUtils.searchOneLineOneColumn(Queries.BUSCA_CERTIF_BVP_DESEMPREGO_INVOLUNT_SEM_SINISTRO, null, apolice, DatabaseName.BVP);
+		lifeConsultaClientePage.pesquisarClienteCertificado(certificadoDocumentoCardifApolice);
+	}
+	
+	@Dado("^preenchendo o Campo Certificado com um numero especifico \"([^\"]*)\"$")
+	public void preenchendo_o_Campo_Certificado_com_um_numero_especifico(String certificado) throws Throwable {
+		LifeConsultaClientePage lifeConsultaClientePage = new LifeConsultaClientePage();
+		String certificadoDocumentoEspecifico = DatabaseUtils.searchOneLineOneColumn(Queries.BUSCA_CERTIF_BVP_DESEMPREGO_INVOLUNT_SEM_SINISTRO, certificado, null, DatabaseName.BVP);
+		lifeConsultaClientePage.pesquisarClienteCertificado(certificadoDocumentoEspecifico);
+	}
 	@E("^preenchendo o Campo Certificado do ambiente BVP$")
-	public void preenchendo_o_Campo_Certificado_do_ambiente_BVP() throws Throwable {
+	public void preenchendo_o_Cacmpo_Certifiado_do_ambiente_BVP() throws Throwable {
 		LifeConsultaClientePage lifeConsultaClientePage = new LifeConsultaClientePage();
 		String certificadoDocumentoBvp = DatabaseUtils
 				.searchOneLineOneColumn(Queries.BUSCA_CERTIF_BVP_DESEMPREGO_INVOLUNT_SEM_SINISTRO, DatabaseName.BVP);
@@ -145,13 +164,6 @@ public class AberturaSinistroStepDefinition {
 		Utils.logInfo("O Sinistro não foi aberto devido a: " + labelPopUp);
 	}
 	
-	@Entao("^o sinistro nao devera ser aberto devido a data de aviso nao ter sido preenchida exibindo a mensagem \"([^\"]*)\"$")
-	public void o_sinistro_nao_devera_ser_aberto_devido_a_data_de_aviso_nao_ter_sido_preenchida_exibindo_a_mensagem(
-			String mensagemSemDataAviso) throws Throwable {
-		Assert.assertEquals(mensagemSemDataAviso, labelPopUp);
-		Utils.logInfo("O Sinistro não foi aberto devido a: " + labelPopUp);
-	}
-
 	@Entao("^o sinistro devera ser preenchido com as informacoes do formulario com a data de aviso maior que a atual$")
 	public void o_sinistro_devera_ser_preenchido_com_as_informacoes_do_formulario_com_a_data_de_aviso_maior_que_a_atual(
 			List<Map<String, String>> formulario) throws Throwable {

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
@@ -15,9 +16,18 @@ import br.com.cardif.databaseutils.DatabaseName;
 public class DatabaseUtils {
 	
 	public static String searchOneLineOneColumn(String sql, DatabaseName base) throws Exception {
+		try {			
+			return searchOneLineOneColumn(sql, null, null, base);
+		} catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
+	
+	public static String searchOneLineOneColumn(String sql, String certificate, String mp, DatabaseName base) throws Exception {
 		try {
 			Connection conn = getConnection(base);
-			ResultSet rs = executeQuery(sql, conn);			
+			sql = appendCertificateMasterPolicy(sql, certificate, mp);
+			ResultSet rs = executeQuery(sql, conn);
 			String retorno = readOneLineOneColumn(rs);
 			closeConnection(conn);
 			
@@ -27,11 +37,19 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public static String [] searchOneLineTwoColumns(String sql, DatabaseName base) throws Exception {
+	public static String [] searchOneLineNColumns(String sql, DatabaseName base) throws Exception {
+		try {
+			return searchOneLineNColumns(sql, null, null, base);
+		} catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
+	
+	public static String [] searchOneLineNColumns(String sql, String certificate, String mp, DatabaseName base) throws Exception {
 		try {
 			Connection conn = getConnection(base);
 			ResultSet rs = executeQuery(sql, conn);			
-			String [] retorno = readOneLineTwoColumn(rs);
+			String [] retorno = readOneLineNColumn(rs);
 			closeConnection(conn);
 			
 			return retorno;
@@ -105,20 +123,33 @@ public class DatabaseUtils {
 		}
 	}
 	
-	private static String [] readOneLineTwoColumn(ResultSet rs) throws Exception {
+	private static String [] readOneLineNColumn(ResultSet rs) throws Exception {
 		try {
 			String [] result = null;
+			Object obj = null;
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnCount = rsmd.getColumnCount();
+			
 			while(rs.next()) {
-				result = new String[2];
+				result = new String[columnCount];
 				
-				int r = rs.getInt(1);
-				result [0] = String.valueOf(r);
-				result [1] = rs.getString(2);
+				for (int i = 0; i < columnCount; i++) {
+					obj = rs.getObject(i + 1);
+					result [i] = readColumn(obj);
+				}
 			}
 			
 			return result;
 		} catch (SQLException e) {
 			throw new Exception(e);
+		}
+	}
+	
+	private static String readColumn(Object obj) {
+		if (obj instanceof String) {
+			return (String) obj;
+		} else { // inteiro
+			return String.valueOf(obj);
 		}
 	}
 	
@@ -135,6 +166,16 @@ public class DatabaseUtils {
 		} catch (IOException ie) {
 			throw new Exception(ie);
 		}
+	}
+	
+	private static String appendCertificateMasterPolicy(String sql, String certificate, String mp) {
+		if (certificate != null) {
+			sql += " and pc.policy_no = " + certificate;
+		} else if (mp != null) {
+			sql += " and mp.mp_no = " + mp;
+		}
+		
+		return sql;
 	}
 	
 }
