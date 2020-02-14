@@ -208,19 +208,6 @@ public class AberturaSinistroStepDefinition {
 	public void o_sinistro_nao_devera_ser_aberto_e_exibe_a_mensagem(String mesangem) throws Throwable {
 		Assert.assertEquals(mesangem, msgDataAviso);
 	}
-
-	@Entao("^o sinistro devera ser aberto de acordo com as informacoes do formulario do risco iftt$")
-	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_iftt(
-			List<Map<String, String>> formulario) throws Throwable {
-		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroIfttNatuerzaNaoPreenchida(formulario);
-	}	
-	
-	@Entao("^o sinistro devera ser aberto de acordo com as informacoes do formulario do risco iftt sem natureza$")
-	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_iftt_sem_natureza(List<Map<String, String>> formulario) throws Throwable {
-		LifeAberturaSinistroPage lifeAberturaSinistroPage = new LifeAberturaSinistroPage();
-		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroIfttNatuerzaNaoPreenchida(formulario);
-		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
-	}
 	
 	@Entao("^o sinistro devera ser aberto de acordo com as informacoes do formulario do risco iftt$")
 	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_iftt(List<Map<String, String>> formulario) throws Throwable {
