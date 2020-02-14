@@ -94,10 +94,4 @@ public class LifeAberturaSinistroElementMap extends PageObjectUtils {
 	//Mensagens de erro
 
 	
-	
-	
-	
-	
-	
-	
 }

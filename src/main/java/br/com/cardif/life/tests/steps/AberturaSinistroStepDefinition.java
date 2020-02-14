@@ -116,16 +116,16 @@ public class AberturaSinistroStepDefinition {
 	}
 
 	@Entao("^o sinistro devera ser aberto de acordo com as informacoes do formulario do risco morte$")
-	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_morte(
-			List<Map<String, String>> formulario) throws Throwable {
+	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_morte(List<Map<String, String>> formulario) throws Throwable {
+		LifeAberturaSinistroPage lifeAberturaSinistroPage = new LifeAberturaSinistroPage();
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroMorte(formulario);
 		Assert.assertFalse(nrSinistro.isEmpty());
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
 	}
 
 	@Entao("^o sinistro devera ser aberto de acordo com as informacoes do formulario do risco morte BVP$")
-	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_morte_BVP(
-			List<Map<String, String>> formulario) throws Throwable {
+	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_morte_BVP(List<Map<String, String>> formulario) throws Throwable {
+		LifeAberturaSinistroPage lifeAberturaSinistroPage = new LifeAberturaSinistroPage();
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroMorteBVP(formulario);
 		Assert.assertFalse(nrSinistro.isEmpty());
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
@@ -138,10 +138,9 @@ public class AberturaSinistroStepDefinition {
 		labelPopUp = lifeAberturaSinistroPage.aberturaSinistroMorteSemDataAvisoNegativo(formulario);
 
 	}
-
-	@Entao("^o sinistro nao devera ser aberto devido a falta de aviso vazia exibindo a mensagem \"([^\"]*)\"$")
-	public void o_sinistro_nao_devera_ser_aberto_devido_a_falta_de_aviso_vazia_exibindo_a_mensagem(
-			String mensagemSemDataAviso) throws Throwable {
+	
+	@Entao("^o sinistro nao devera ser aberto devido a data de aviso nao ter sido preenchida exibindo a mensagem \"([^\"]*)\"$")
+	public void o_sinistro_nao_devera_ser_aberto_devido_a_falta_de_aviso_nao_ter_sido_preenchida_exibindo_a_mensagem(String mensagemSemDataAviso) throws Throwable {
 		Assert.assertEquals(mensagemSemDataAviso, labelPopUp);
 		Utils.logInfo("O Sinistro não foi aberto devido a: " + labelPopUp);
 	}
@@ -214,6 +213,19 @@ public class AberturaSinistroStepDefinition {
 	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_iftt(
 			List<Map<String, String>> formulario) throws Throwable {
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroIfttNatuerzaNaoPreenchida(formulario);
+	}	
+	
+	@Entao("^o sinistro devera ser aberto de acordo com as informacoes do formulario do risco iftt sem natureza$")
+	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_iftt_sem_natureza(List<Map<String, String>> formulario) throws Throwable {
+		LifeAberturaSinistroPage lifeAberturaSinistroPage = new LifeAberturaSinistroPage();
+		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroIfttNatuerzaNaoPreenchida(formulario);
+		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
+	}
+	
+	@Entao("^o sinistro devera ser aberto de acordo com as informacoes do formulario do risco iftt$")
+	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_iftt(List<Map<String, String>> formulario) throws Throwable {
+		LifeAberturaSinistroPage lifeAberturaSinistroPage = new LifeAberturaSinistroPage();
+		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroIftt(formulario);
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
 	}
 	
@@ -225,8 +237,8 @@ public class AberturaSinistroStepDefinition {
 
 
 	@Entao("^o sinistro devera ser aberto de acordo com as informacoes do formulario do risco Roubo ou Furto Qualificado do Aparelho Movel$")
-	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_Roubo_ou_Furto_Qualificado_do_Aparelho_Movel(
-			List<Map<String, String>> formulario) throws Throwable {
+	public void o_sinistro_devera_ser_aberto_de_acordo_com_as_informacoes_do_formulario_do_risco_Roubo_ou_Furto_Qualificado_do_Aparelho_Movel(List<Map<String, String>> formulario) throws Throwable {
+		LifeAberturaSinistroPage lifeAberturaSinistroPage = new LifeAberturaSinistroPage();
 		String nrSinistro = lifeAberturaSinistroPage.aberturaSinistroRouboOuFurto(formulario);
 		Assert.assertFalse(nrSinistro.isEmpty());
 		Utils.logInfo("Numero de Sinistro é:" + nrSinistro);
