@@ -2,7 +2,10 @@ package br.com.cardif.utils;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,6 +16,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -26,6 +31,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
@@ -70,6 +76,23 @@ public class Utils {
 			extentTest.log(Status.ERROR, "Erro de execucao: " + e.getMessage());
 		}
 	}
+	
+	
+	public static void logPrintFullScreen(String log) {
+		ExtentTest extentTest = TestRule.getExtentTest();
+
+		try {
+			efetuarPrintFullScreen(log);
+			extentTest.log(Status.INFO, "Print: " +log);
+
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			extentTest.log(Status.ERROR, "Erro de execucao: " + e.getMessage());
+		}
+	}
+	
+	
 
 	public static void logPrintPass(String log) {
 		ExtentTest extentTest = TestRule.getExtentTest();
@@ -120,6 +143,23 @@ public class Utils {
 			File scrFile = ((TakesScreenshot) TestRule.getDriver()).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(scrFile, new File(TestRule.getPathCenarioEvidencia() + "\\" +TestRule.getQtdPrint()+log + ".png"));
 			PDFHelper.addTextScreenshot(log, Files.readAllBytes(scrFile.toPath()));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	private static void efetuarPrintFullScreen(String log) {
+
+		try {
+			TestRule.newPrint();
+			// Pega tamanho da tela
+			 Dimension dimen = Toolkit.getDefaultToolkit().getScreenSize();
+			 BufferedImage screencapture = new Robot().createScreenCapture(new Rectangle(dimen));
+			 File scrFile = new File(TestRule.getPathCenarioEvidencia() + "\\" +TestRule.getQtdPrint()+log + ".png");
+			 ImageIO.write(screencapture,"png",scrFile);
+	      	 PDFHelper.addTextScreenshot(log, Files.readAllBytes(scrFile.toPath()));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
