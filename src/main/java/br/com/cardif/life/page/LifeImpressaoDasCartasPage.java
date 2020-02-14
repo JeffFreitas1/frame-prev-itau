@@ -1,5 +1,7 @@
 package br.com.cardif.life.page;
 
+import java.awt.Robot;
+
 import org.openqa.selenium.support.PageFactory;
 
 import br.com.cardif.life.map.LifeImpressaoDasCartasElementMap;
@@ -13,7 +15,7 @@ public class LifeImpressaoDasCartasPage extends LifeImpressaoDasCartasElementMap
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void preencherSolicitacaoDeDocumentos() throws Exception {
+	public void preencherSolicitacaoDeDocumentos(String strNumeroSinistro) throws Exception {
 		sfClick(botaoPorTipo);
 		sfClick(tipoCartaDropDown);
 		//sfMoveToElement(campoPesquisaTipoCarta);
@@ -21,9 +23,11 @@ public class LifeImpressaoDasCartasPage extends LifeImpressaoDasCartasElementMap
 		sfClick(campoPesquisaSolicitacaoDocumentos);
 		sfClick(botaoPorTipo);
 		sfClick(codSinistro);
-		sfSendText(codSinistro, "1066413");
+		sfSendText(codSinistro, strNumeroSinistro);
 		sfClick(botaoGerarRelatorio);
 		sfClick(botaoImrpimir);
+		rbOkDownload();
+		sfClick(botaoNaoEnviarCarta);
 		
 	}
 	

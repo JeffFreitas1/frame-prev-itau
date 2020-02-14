@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,7 +37,6 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 	}
 
 	public String aberturaSinistro(List<Map<String, String>> formulario) throws Exception {
-		sfZoomOut();
 		sfZoomOut();
 		sfClick(listaRazaoAbertura);
 		sfClick(razaoAbertura.replace("@RAZAOABERTURA", Utils.getValorFormulario("Razão Abertura", formulario)));
@@ -66,17 +66,16 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 	}
 
 	public String aberturaSinistroDesemprego(List<Map<String, String>> formulario) throws Exception {
-		// sfClick(listaRazaoAbertura);
-		// sfClick(razaoAbertura.replace("@RAZAOABERTURA",
-		// Utils.getValorFormulario("Razão Abertura", formulario)));
-		sfZoomOut();
 		sfClick(listaRisco);
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
-		// sfSendText(dtDataAviso, Utils.getValorFormulario("Data Aviso", formulario));
-		sfSendText(dtDataOcorrencia, Utils.getValorFormulario("Data Afastamento", formulario));
-
-		sfSendText(dtDataAdmissao, Utils.getValorFormulario("Data Admissao", formulario));
-		sfSendText(dtDataAvisoPrevio, Utils.getValorFormulario("Data Aviso Previo", formulario));
+		SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+		Date dateMes = Date.from(ZonedDateTime.now().minusMonths(1).toInstant());
+		formatoData.format(dateMes);
+		sfSendText(dtDataOcorrencia,formatoData.format(dateMes)); //Data afastamento
+		Date dateAno = Date.from(ZonedDateTime.now().minusYears(2).toInstant());
+		formatoData.format(dateAno);
+		sfSendText(dtDataAdmissao, formatoData.format(dateAno));
+		sfSendText(dtDataAvisoPrevio, formatoData.format(dateMes));
 		sfSendText(txtPis, Utils.getValorFormulario("PIS", formulario));
 		sfSendText(txtCNPJ, Utils.getValorFormulario("CNPJ", formulario));
 		sfClick(txtCNPJ);
@@ -85,12 +84,12 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 		sfClick(botaoOkAberturaSinistro);
 		waitElementInvisibility(LifeHomeElementMap.loading);
 		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Abertura de Sinistro");
-		return getNumeroSinistro();
+		return getNumeroSinistro();	
+		}
 
-	}
+
 
 	public String aberturaSinistroDesempregoInvoluntario(List<Map<String, String>> formulario) throws Exception {
-		;
 		sfZoomOut();
 		sfClick(listaRisco);
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
@@ -238,8 +237,8 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 		return getNumeroSinistro();
 
 	}
-
-	public String aberturaSinistroRouboOuFurto(List<Map<String, String>> formulario) throws Exception {
+	
+	public String aberturaSinistroIftt(List<Map<String, String>> formulario) throws Exception {
 		sfZoomOut();
 		sfClick(listaRisco);
 		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
@@ -251,10 +250,23 @@ public class LifeAberturaSinistroPage extends LifeAberturaSinistroElementMap {
 
 	}
 
+	public String aberturaSinistroRouboOuFurto(List<Map<String, String>> formulario) throws Exception {
+		sfZoomOut();
+		sfClick(listaRisco);
+		sfSendText(dtDataOcorrencia, Utils.getValorFormulario("Data Ocorrencia", formulario));
+		sfClick(risco.replace("@RISCO", Utils.getValorFormulario("Risco", formulario)));
+		waitElementInvisibility(LifeHomeElementMap.loading);
+		sfClick(botaoOkAberturaSinistro);
+		waitElementInvisibility(LifeHomeElementMap.loading);
+		sfPrintScreenSwitchFrame(LifeHomePage.getIdCurrentFrame(), "Abertura de Sinistro");
+		return getNumeroSinistro();
+
+	}
+
 	public String getNumeroSinistro() throws Exception {
 
 		Map<String, Integer> cabecalho = new HashMap<>();
-		String numeroSinistro = null;
+		String numeroSinistro = "";
 
 		// Mapeamento dos campos da tabela de certificados
 		WebElement tabelaCabecalho = sfGetElementByCss(indexPolicyCertificateTable);

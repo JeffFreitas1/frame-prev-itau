@@ -28,6 +28,7 @@ public class LifeLoginPage extends LifeLoginElementMap {
 			sfSendText(senha, Utils.getValorFormulario("Senha", credenciais));
 			sfClick(abrirOpcoes);
 			sfClick(ambiente.replace("@BASE", Utils.getValorFormulario("Base", credenciais)));
+			Utils.logPrint("Login");
 			sfClick(botaoLogin);
 			return true;
 		} catch (Exception e) {
@@ -42,6 +43,7 @@ public class LifeLoginPage extends LifeLoginElementMap {
 			sfSendText(senha, TestRule.getCredenciaisLife().get("Senha"));
 			sfClick(abrirOpcoes);
 			sfClick(ambiente.replace("@BASE", baseSistema));
+			Utils.logPrint("Login");
 			sfClick(botaoLogin);
 			return true;
 		} catch (Exception e) {

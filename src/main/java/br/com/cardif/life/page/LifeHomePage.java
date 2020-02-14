@@ -5,6 +5,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import br.com.cardif.life.map.LifeHomeElementMap;
 import br.com.cardif.testrules.TestRule;
+import br.com.cardif.utils.Utils;
 
 
 public class LifeHomePage extends LifeHomeElementMap {
@@ -99,6 +100,7 @@ public class LifeHomePage extends LifeHomeElementMap {
 	
 	public void acessarMenuTransacoesCliente() throws Exception {
 		sfNavigateDropDownMenu(menuTrancacoes);
+		Utils.logPrint("Menu Cliente");
 		sfClick(opcaoTransacaoCliente);
 		sfSwitchFrame(getIdFrame());
 	}
@@ -106,6 +108,7 @@ public class LifeHomePage extends LifeHomeElementMap {
 	public void acessarMenuTransacoesSinistroAnaliseSinistro() throws Exception {
 		sfNavigateDropDownMenu(menuTrancacoes);
 		sfNavigateDropDownMenu(opcaoTransacaoSinistro);
+		Utils.logPrint("Transacao Sinistro");
 		//sfNavigateDropDownMenu(opcaoAnaliseSinistro);
 		sfClick(opcaoAnaliseSinistro);
 		sfSwitchFrame(getIdFrame());
@@ -114,6 +117,7 @@ public class LifeHomePage extends LifeHomeElementMap {
 	public void acessarMenuTransacoesSinistroImportacaoDeDocumentos() throws Exception {
 		sfNavigateDropDownMenu(menuTrancacoes);
 		sfNavigateDropDownMenu(opcaoTransacaoSinistro);
+		Utils.logPrint("Importacao de Documentos");
 		sfClick(opcaoImportacaoDeDocumentos);
 		sfSwitchFrame(getIdFrame());
 	}
@@ -132,6 +136,14 @@ public class LifeHomePage extends LifeHomeElementMap {
 		sfClick(opcaoTrancacaoAutorizacaoPagamento);
 		waitLoading(abaAutorizacaoPagamento);
 		sfSwitchFrame(getIdFrame());
+	}
+	
+	public void acessarTrancacoesSinistroImportacaoDeDocumentos() throws Exception{
+		sfNavigateDropDownMenu(menuTrancacoes);
+		sfNavigateDropDownMenu(opcaoTransacaoSinistro);
+		sfClick(opcaoImportacaoDeDocumentos);
+		sfSwitchFrame(getIdFrame());
+		
 	}
 	
 	
