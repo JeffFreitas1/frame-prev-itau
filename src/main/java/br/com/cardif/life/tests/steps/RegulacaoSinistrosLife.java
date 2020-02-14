@@ -20,6 +20,7 @@ import cucumber.api.java.pt.Entao;
 public class RegulacaoSinistrosLife {
 	String statusSinistro;
 	String sinistroDemissao;
+	LifeImportacaoDeDocumentosPage lifeImportacaoDeDocumentosPage;
 
 	@Dado("^o acesso ao sistema life \"([^\"]*)\"$")
 	public void o_acesso_ao_sistema_life_ambiente(String ambiente) throws Throwable {

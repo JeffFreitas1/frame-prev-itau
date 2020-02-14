@@ -1,5 +1,6 @@
 package br.com.cardif.life.model;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import br.com.cardif.life.map.LifeSinistroImportacaoDocumentosElementMap;
@@ -14,7 +15,10 @@ public class LifeImportacaoDeDocumentosPage extends LifeSinistroImportacaoDocume
 	}
 
 	public void consultaCampoSinsitro(String strNumeroSinistro) throws Exception {
-		waitElementInvisibility(campoNumeroSinsitro);
+		sfZoomIn();
+		sfZoomOut();
+		sfClick(campoNumeroSinsitro);
+		//waitElementInvisibility(campoNumeroSinsitro);
 		sfSendText(campoNumeroSinsitro, strNumeroSinistro);
 		sfClick(botaoImportar);
 		rbUploadFile("C:\\Users\\d55443\\Downloads\\indice.jpg");

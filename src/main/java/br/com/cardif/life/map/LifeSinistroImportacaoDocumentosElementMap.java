@@ -13,7 +13,7 @@ public class LifeSinistroImportacaoDocumentosElementMap extends PageObjectUtils 
 	protected String botaoDropdownSelecionarArquivo = "//label[contains(@id,'frmClaimDocumentImport:doc_row:0:doc_type_label')]";
 	protected String botaoEmailProtocolo = "(//li[contains(.,'Email/Protocolo - 163')])[1]";
 	//Campos
-	protected String campoNumeroSinsitro = "//input[@name='frmClaimDocumentImport:txtNrSinistro']";
+	protected String campoNumeroSinsitro = "//input[@id='frmClaimDocumentImport:txtNrSinistro']";
 	protected String dropDownSelecionarArquivo = "//label[contains(@id,'frmClaimDocumentImport:doc_row:0:doc_type_label')]";
 	protected String campoPesquisaArquivo = "//input[@name='frmClaimDocumentImport:doc_row:0:doc_type_filter']";
 	
