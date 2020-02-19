@@ -463,7 +463,7 @@ public class PageObjectUtils {
 
 	public void sfPrintScreenSwitchFrame(String frame, String log) {
 		sfSwitchDefaultFrame();
-		Utils.logPrint(log);
+		Utils.logPrintFullScreen(log);
 		sfSwitchFrame(frame);
 	}
 

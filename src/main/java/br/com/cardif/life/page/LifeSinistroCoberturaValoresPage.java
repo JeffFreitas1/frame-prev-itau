@@ -26,6 +26,11 @@ public class LifeSinistroCoberturaValoresPage extends LifeSinistroCoberturaValor
 		sfClick(botaoHistoricoValores);
 	}
 	
+	public double pegarValorSaldoPagar() throws Exception{
+		double saldo=Double.valueOf(sfGetTextHiddenDisable(saldoPagar));
+		return saldo;
+	}
+	
 	public boolean validarPagamento() throws Exception {
 		Map<String, Integer> cabecalho = new HashMap<>();
 		double saldo=Double.valueOf(sfGetTextHiddenDisable(saldoPagar));

@@ -32,9 +32,9 @@ public class LifeSinistroFavorecidosPage extends LifeSinistroFavorecidosElementM
 		sfSendText(txtConta, "354478");
 		sfSendText(txtDVConta, "3");
 		sfClick(botaoIncluirNovoBeneficiario);
-		LifeSinistroBeneficiarioInclusaoPage cadastroBeneficiario = new LifeSinistroBeneficiarioInclusaoPage();
-		cadastroBeneficiario.incluirNovoBeneficiario();
-		//sfClick(botaoSalvarFavorecido);
+		//LifeSinistroBeneficiarioInclusaoPage cadastroBeneficiario = new LifeSinistroBeneficiarioInclusaoPage();
+		//cadastroBeneficiario.incluirNovoBeneficiario();
+		sfClick(botaoSalvarFavorecido);
 		
 	}
 	

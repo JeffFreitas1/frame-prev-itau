@@ -14,13 +14,16 @@ public class LifeImportacaoDeDocumentosPage extends LifeSinistroImportacaoDocume
 	}
 	
 	public void fazerUploadImagem(String strNumeroSinistro) throws Exception {
-		sfClick(campoNumeroSinsitro);
-		sfClick(botaoImportar);
+		sfSendText(campoNumeroSinsitro, strNumeroSinistro);
+		sfMoveToElementClickJs(botaoImportar);
 		rbUploadFile("C:\\Users\\d55443\\Downloads\\indice.jpg");
 		sfClick(botaoDropdownSelecionarArquivo);
 		sfSendText(campoPesquisaArquivo, "Email/Protocolo");
 		sfClick(botaoEmailProtocolo);
 		sfClick(botaoGravar);
+		waitLoading(botaoOkArquivosImportados);
+		sfClick(botaoOkArquivosImportados);
+	
 
 }
 }

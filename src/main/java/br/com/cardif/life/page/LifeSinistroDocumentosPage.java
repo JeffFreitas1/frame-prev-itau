@@ -25,8 +25,8 @@ public class LifeSinistroDocumentosPage extends LifeSinistroDocumentosElementMap
 		waitElementInvisibility(LifeHomeElementMap.loading);
 		// sfMoveToElement(botaoAlterarDadosSinistro);
 		sfClick(botaoAdicionarDocumento);
-
 	}
+	
 	public void preencherCampoDocumento () throws Exception {
 	sfClick(dropDownDocumento);
 	sfSendText(campoPesquisaTiposDocumentos, "Email/Protocolo");
@@ -38,7 +38,10 @@ public class LifeSinistroDocumentosPage extends LifeSinistroDocumentosElementMap
 	waitLoadingElement(botaoOkInformacoesSalvas);
 	sfClick(botaoOkInformacoesSalvas);
 	waitLoadPage();
+	}
 	
-
+	public void selecionarBotaoAdicionar() throws Exception {
+		waitElementInvisibility(LifeHomeElementMap.loading);
+		sfClick(botaoAdicionarDocumento);
 	}
 }

@@ -5,12 +5,14 @@ import org.junit.Assert;
 import br.com.cardif.databaseutils.DatabaseName;
 import br.com.cardif.databaseutils.jdbc.DatabaseUtils;
 import br.com.cardif.databaseutils.jdbc.queries.Queries;
-import br.com.cardif.life.model.LifeImportacaoDeDocumentosPage;
 import br.com.cardif.life.page.LifeConsultaSinistroPage;
 import br.com.cardif.life.page.LifeHomePage;
+import br.com.cardif.life.page.LifeImportacaoDeDocumentosPage;
 import br.com.cardif.life.page.LifeImpressaoDasCartasPage;
 import br.com.cardif.life.page.LifeLoginPage;
+import br.com.cardif.life.page.LifeSinistroCoberturaValoresPage;
 import br.com.cardif.life.page.LifeSinistroDocumentosPage;
+import br.com.cardif.life.page.LifeSinistroFavorecidosPage;
 import br.com.cardif.life.page.LifeSinistroSituacaoSinistroPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.pt.Dado;
@@ -20,7 +22,9 @@ import cucumber.api.java.pt.Entao;
 public class RegulacaoSinistrosLife {
 	String statusSinistro;
 	String sinistroDemissao;
-	LifeImportacaoDeDocumentosPage lifeImportacaoDeDocumentosPage;
+	LifeSinistroDocumentosPage lifeImporacaoDeDocumentosPage;
+	double saldo;
+
 
 	@Dado("^o acesso ao sistema life \"([^\"]*)\"$")
 	public void o_acesso_ao_sistema_life_ambiente(String ambiente) throws Throwable {
@@ -112,76 +116,46 @@ public class RegulacaoSinistrosLife {
 
 	@Entao("^fazer o upload de uma imagem nos formatos aceitos$")
 	public void fazer_o_upload_de_uma_imagem_nos_formatos_aceitos() throws Throwable {
-	LifeImportacaoDeDocumentosPage lifeImportacaoDeDocumentosPage = new LifeImportacaoDeDocumentosPage();
-	sinistroDemissao = DatabaseUtils.searchOneLineOneColumn(Queries.BUSCA_SINISTRO_VIDA_DESEMPREGO,
+		LifeImportacaoDeDocumentosPage lifeImportacaoDeDocumentosPage = new LifeImportacaoDeDocumentosPage();
+	    sinistroDemissao = DatabaseUtils.searchOneLineOneColumn(Queries.BUSCA_SINISTRO_VIDA_DESEMPREGO,
 			DatabaseName.CARDIF);
-	lifeImportacaoDeDocumentosPage.consultaCampoSinsitro(sinistroDemissao);
-	}
-
-	@Entao("^validar a mensagem Arquivos importados com sucesso!$")
-	public void validar_a_mensagem_Arquivos_importados_com_sucesso() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+	    lifeImportacaoDeDocumentosPage.fazerUploadImagem(sinistroDemissao);
 	}
 
 	@Entao("^Validar se o Status do sinistro mudou para Pendente de Visualizacao$")
 	public void validar_se_o_Status_do_sinistro_mudou_para_Pendente_de_Visualizacao() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+		LifeSinistroSituacaoSinistroPage lifeSinistroSituacaoSinistroPage = new LifeSinistroSituacaoSinistroPage();
+		lifeSinistroSituacaoSinistroPage.validarStatusDoSinistro();
 	}
 
 	@Entao("^Clicar no botao Alterar$")
 	public void clicar_no_botao_Alterar() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+		LifeSinistroDocumentosPage lifeSinistroDocumentosPage = new LifeSinistroDocumentosPage();
+		lifeSinistroDocumentosPage.clicarBotaoAlterar();
 	}
 
-	@Entao("^selecionar a opcao Beneficiario$")
-	public void selecionar_a_opcao_Beneficiario() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
-	}
-
-	@Entao("^escolher pessoa fisica$")
-	public void escolher_pessoa_fisica() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
-	}
-
-	@Entao("^clicar em Ok$")
-	public void clicar_em_Ok() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
-	}
-
-	@Entao("^clicar em Salvar$")
-	public void clicar_em_Salvar() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
-	}
-
-	@Entao("^clicar em Alterar novamente$")
-	public void clicar_em_Alterar_novamente() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+	@Entao("^cadastrar um novo beneficiario$")
+	public void cadastrar_um_novo_beneficiario() throws Throwable {
+		LifeSinistroFavorecidosPage lifeSinistroFavorecidosPage = new LifeSinistroFavorecidosPage();
+		lifeSinistroFavorecidosPage.incluirFavorecidoBeneficiario();
 	}
 
 	@Entao("^clicar na aba Cobertura/Valores$")
 	public void clicar_na_aba_Cobertura_Valores() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+		LifeConsultaSinistroPage lifeConsultaSinistroPage = new LifeConsultaSinistroPage();
+		lifeConsultaSinistroPage.acessarCoberturaValores();
 	}
 
 	@Entao("^guardar o valor do campo Saldo a pagar$")
 	public void guardar_o_valor_do_campo_Saldo_a_pagar() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+		LifeSinistroCoberturaValoresPage lifeSinistroCoberturaValoresPage = new LifeSinistroCoberturaValoresPage();
+		saldo = lifeSinistroCoberturaValoresPage.pegarValorSaldoPagar();
 	}
 
 	@Entao("^clicar na aba Pagamentos$")
 	public void clicar_na_aba_Pagamentos() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+		LifeConsultaSinistroPage lifeConsultaSinistroPage = new LifeConsultaSinistroPage();
+		lifeConsultaSinistroPage.acessarCoberturaValores();
 	}
 
 	@Entao("^clicar no botao Adicionar$")

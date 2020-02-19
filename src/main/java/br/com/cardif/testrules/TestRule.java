@@ -30,6 +30,7 @@ import org.monte.media.FormatKeys.MediaType;
 import org.monte.media.math.Rational;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -85,14 +86,18 @@ public class TestRule {
 		case "chrome":
 			System.setProperty("webdriver.chrome.driver", "C:\\temp\\driver\\chromedriver.exe");
 			driver = new ChromeDriver();
+			driver.manage().window().setPosition(new Point(1000, 1000));
+			//driver.manage().window().fullscreen();
 			break;
 		case "firefox":
 			ProfilesIni profile = new ProfilesIni();
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
+			
 			//firefoxOptions.addPreference("browser.download.folderList", 2);
 			firefoxOptions.addPreference("disable-popup-blocking", true);
 			FirefoxProfile firefoxProfile = profile.getProfile("default-release");
 			firefoxProfile.setPreference("dom.disable_open_during_load", false);
+		
 			
 			firefoxOptions.setProfile(firefoxProfile);
 			//firefoxOptions.addPreference("browser.download.manager.showWhenStarting", false);
@@ -125,8 +130,9 @@ public class TestRule {
 		}
 
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		driver.manage().window().setPosition(new Point(100, 100));
 		driver.manage().window().maximize();
-		wait = new WebDriverWait(driver, 60);
+		wait = new WebDriverWait(driver, 15);
 		capabilities = ((RemoteWebDriver) driver).getCapabilities();
 	}
 

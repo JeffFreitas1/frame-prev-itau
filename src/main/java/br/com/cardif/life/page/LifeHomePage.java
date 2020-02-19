@@ -109,7 +109,6 @@ public class LifeHomePage extends LifeHomeElementMap {
 		sfNavigateDropDownMenu(menuTrancacoes);
 		sfNavigateDropDownMenu(opcaoTransacaoSinistro);
 		Utils.logPrint("Transacao Sinistro");
-		//sfNavigateDropDownMenu(opcaoAnaliseSinistro);
 		sfClick(opcaoAnaliseSinistro);
 		sfSwitchFrame(getIdFrame());
 	}
