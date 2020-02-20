@@ -7,20 +7,25 @@ public class Queries {
 	public static final String BUSCA_CERTIF_VIDA_DESEMPREGO_SEM_SINISTRO =
 		" select top 1 pc.policy_no " +
 		" from policy_certificate pc (nolock) " +
+		" inner join client cl (nolock) " +
+		" on cl.client_no = pc.client_no " +
+		" inner join client_address ca (nolock) " +
+		" on ca.client_no = cl.client_no " +
 		" inner join master_policy mp (nolock) on mp.mp_no = pc.mp_no and mp.mp_endors_no = pc.mp_endors_no " +
 		" inner join partner p (nolock) on p.partner_id = mp.partner_id " +
 		" inner join letter l (nolock) on l.partner_id = p.partner_id " +
 		" left join claim c (nolock) on c.policy_no = pc.policy_no " +
-		" inner join pc_prod_rsk_covrge_plans pcx (nolock) on pcx.policy_no = pc.policy_no " +
+		" inner join policy_certif_prod_rsk_covrge pcx (nolock) on pcx.policy_no = pc.policy_no " +
 		" and pcx.polcrt_endors_no = pc.polcrt_endors_no " +
 		" and pcx.risk_id = 8 " +
 		" where c.policy_no is null " +
 		" and pc.polcrt_ins_dtm > '20170101' " +
+		" and pcx.pcprc_inssured_amount > 0 " +
 		" and pc.polst_id = 1 " +
-		" and getdate() between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
+		" and dateadd(month, -1, getdate()) between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
 		" and pc.polcrt_del_fg = 'N' " +
 		" and mp.mp_del_fg = 'N' " +
-		" and pcx.pcprcpln_del_fg = 'N' " +
+		" and pcx.pcprc_del_fg = 'N' " +
 		" and mp.mp_no not in ( " +
 		" 	select mp_no " +
 		" 	from present_value_calculator (nolock) " +
@@ -46,12 +51,13 @@ public class Queries {
 		" select top 1 pc.policy_no " +
 		" from policy_certificate pc (nolock) " +
 		" inner join master_policy mp (nolock) on mp.mp_no = pc.mp_no and mp.mp_endors_no = pc.mp_endors_no " +
+		" inner join partner p (nolock) on p.partner_id = mp.partner_id " +
 		" left join claim c (nolock) on c.policy_no = pc.policy_no " +
 		" inner join pc_prod_rsk_covrge_plans pcx (nolock) on pcx.policy_no = pc.policy_no and pcx.polcrt_endors_no = pc.polcrt_endors_no and pcx.risk_id = 33 " +
 		" where c.policy_no is null " +
 		" and pc.polcrt_ins_dtm > '20180101' " +
 		" and pc.polst_id = 1 " +
-		" and getdate() between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
+		" and dateadd(month, -1, getdate()) between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
 		" and pc.polcrt_del_fg = 'N' " +
 		" and mp.mp_del_fg = 'N' " +
 		" and pcx.pcprcpln_del_fg = 'N' ";
@@ -59,6 +65,10 @@ public class Queries {
 	public static final String BUSCA_CERTIF_VIDA_MORTE_SEM_SINISTRO =
 		" select top 1 pc.policy_no " +
 		" from policy_certificate pc (nolock) " +
+		" inner join client cl (nolock) " +
+		" on cl.client_no = pc.client_no " +
+		" inner join client_address ca (nolock) " +
+		" on ca.client_no = cl.client_no " +
 		" inner join master_policy mp (nolock) " +
 		" on mp.mp_no = pc.mp_no and mp.mp_endors_no = pc.mp_endors_no " +
 		" inner join mp_claim_rules mcr (nolock) " +
@@ -77,7 +87,7 @@ public class Queries {
 		" and pc.polcrt_firstpay_due_dtm is null " +
 		" and pc.polcrt_ins_dtm > '20170101' " +
 		" and pc.polst_id = 1 " +
-		" and getdate() between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
+		" and dateadd(month, -1, getdate()) between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
 		" and pc.polcrt_del_fg = 'N' " +
 		" and mp.mp_del_fg = 'N' " +
 		" and pcx.pcprcpln_del_fg = 'N' " +
@@ -87,6 +97,10 @@ public class Queries {
 	public static final String BUSCA_CERTIF_VIDA_MORTE_PARCELA_AUT_SEM_SINISTRO =
 		" select top 1 pc.policy_no, convert(varchar, pc.polcrt_firstpay_due_dtm, 103) firstpay, pc.polcrt_stated_period_vl, pc.polcrt_instmnt_vl " +
 		" from policy_certificate pc (nolock) " +
+		" inner join client cl (nolock) " +
+		" on cl.client_no = pc.client_no " +
+		" inner join client_address ca (nolock) " +
+		" on ca.client_no = cl.client_no " +
 		" inner join master_policy mp (nolock) " +
 		" on mp.mp_no = pc.mp_no and mp.mp_endors_no = pc.mp_endors_no " +
 		" inner join mp_claim_rules mcr (nolock) " +
@@ -107,7 +121,7 @@ public class Queries {
 		" and mcr.clmrls_shortage = 0 "+
 		" and pc.polcrt_ins_dtm > '20170101' " +
 		" and pc.polst_id = 1 " +
-		" and getdate() between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
+		" and dateadd(month, -1, getdate()) between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
 		" and pc.polcrt_del_fg = 'N' " +
 		" and mp.mp_del_fg = 'N' " +
 		" and pcx.pcprcpln_del_fg = 'N' " +
@@ -141,6 +155,39 @@ public class Queries {
 		" and r.rsk_cancel_pc = 'S' " +
 		" and c.clm_del_fg = 'N' " +
 		" order by c.claim_no desc ";
+	
+	
+	public static final String BUSCA_CERTIF_VIDA_MORTE_SEM_SINISTRO_CARTA_AVISO_PGTO =
+		" select top 1 pc.policy_no " +
+		" from policy_certificate pc (nolock) " +
+		" inner join client cl (nolock) " +
+		" on cl.client_no = pc.client_no " +
+		" inner join client_address ca (nolock) " +
+		" on ca.client_no = cl.client_no " +
+		" inner join master_policy mp (nolock) " +
+		" on mp.mp_no = pc.mp_no and mp.mp_endors_no = pc.mp_endors_no " +
+		" inner join mp_claim_rules mcr (nolock) " +
+		" on mcr.mp_no = mp.mp_no and mcr.mp_endors_no = mp.mp_endors_no and mcr.risk_id = 1 " +
+		" and mcr.clmrls_payment_base = 2 " +
+		" inner join partner p (nolock) " +
+		" on p.partner_id = mp.partner_id " +
+		" inner join letter l (nolock) " +
+		" on l.partner_id = p.partner_id " +
+		" left join claim c (nolock) " +
+		" on c.policy_no = pc.policy_no " +
+		" inner join pc_prod_rsk_covrge_plans pcx (nolock) " +
+		" on pcx.policy_no = pc.policy_no and pcx.polcrt_endors_no = pc.polcrt_endors_no " +
+		" and pcx.risk_id = 1 " +
+		" where c.policy_no is null " +
+		" and pc.polcrt_firstpay_due_dtm is null " +
+		" and pc.polcrt_ins_dtm > '20170101' " +
+		" and pc.polst_id = 1 " +
+		" and dateadd(month, -1, getdate()) between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
+		" and pc.polcrt_del_fg = 'N' " +
+		" and mp.mp_del_fg = 'N' " +
+		" and pcx.pcprcpln_del_fg = 'N' " +
+		" and l.letter_del_fg = 'N' " +
+		" and l.letter_name like '%aviso de pagamento%' ";
 	// *** Fim das consultas da base VIDA. ***
 	
 	
@@ -158,7 +205,7 @@ public class Queries {
 		" and pc.polcrt_instmnt_vl is null " +
 		" and pc.polst_id = 1 " +
 		" and pc.polcrt_ins_dtm > '20180101' " +
-		" and getdate() between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
+		" and dateadd(month, -1, getdate()) between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
 		" and pc.polcrt_del_fg = 'N' " +
 		" and mp.mp_del_fg = 'N' " +
 		" and pcx.pcprcpln_del_fg = 'N' " +
@@ -168,12 +215,13 @@ public class Queries {
 		" select top 1 pc.policy_no " +
 		" from policy_certificate pc (nolock) " +
 		" inner join master_policy mp (nolock) on mp.mp_no = pc.mp_no and mp.mp_endors_no = pc.mp_endors_no " +
+		" inner join partner p (nolock) on p.partner_id = mp.partner_id " +
 		" left join claim c (nolock) on c.policy_no = pc.policy_no " +
 		" inner join pc_prod_rsk_covrge_plans pcx (nolock) on pcx.policy_no = pc.policy_no and pcx.polcrt_endors_no = pc.polcrt_endors_no and pcx.risk_id = 9 " +
 		" where c.policy_no is null " +
 		" and pc.polst_id = 1 " +
 		" and pc.polcrt_ins_dtm > '20170101' " +
-		" and getdate() between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
+		" and dateadd(month, -1, getdate()) between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
 		" and pc.polcrt_del_fg = 'N' " +
 		" and mp.mp_del_fg = 'N' " +
 		" and pcx.pcprcpln_del_fg = 'N' ";
@@ -182,12 +230,13 @@ public class Queries {
 		" select top 1 pc.policy_no " +
 		" from policy_certificate pc (nolock) " +
 		" inner join master_policy mp (nolock) on mp.mp_no = pc.mp_no and mp.mp_endors_no = pc.mp_endors_no " +
+		" inner join partner p (nolock) on p.partner_id = mp.partner_id " +
 		" left join claim c (nolock) on c.policy_no = pc.policy_no " +
 		" inner join pc_prod_rsk_covrge_plans pcx (nolock) on pcx.policy_no = pc.policy_no and pcx.polcrt_endors_no = pc.polcrt_endors_no and pcx.risk_id = 1 " +
 		" where c.policy_no is null  " +
 		" and pc.polst_id = 1 " +
 		" and pc.polcrt_ins_dtm > '20170101' " +
-		" and getdate() between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
+		" and dateadd(month, -1, getdate()) between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
 		" and pc.polcrt_del_fg = 'N' " +
 		" and mp.mp_del_fg = 'N' " +
 		" and pcx.pcprcpln_del_fg = 'N' ";
@@ -227,7 +276,7 @@ public class Queries {
 		" and pcx.pcprc_inssured_amount is not null " +
 		" and mcr.clmrls_instmnt_qty = 0 " +
 		" and mcr.clmrls_payment_base = 4 " +
-		" and getdate() between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
+		" and dateadd(month, -1, getdate()) between pc.polcrt_eff_dtm and pc.polcrt_exp_dtm " +
 		" and pc.polcrt_del_fg = 'N' " +
 		" and mp.mp_del_fg = 'N' " +
 		" and pcx.pcprc_del_fg = 'N' " +
